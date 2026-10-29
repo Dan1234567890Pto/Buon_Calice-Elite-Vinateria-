@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Buon_Calice.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Buon_Calice.Models.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Buon_Calice.Controllers.PedidosController",
     "Method": "Post",
     "RelativePath": "api/Pedidos",

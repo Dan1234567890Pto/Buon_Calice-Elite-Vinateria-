@@ -1689,11 +1689,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.csproj",
+      "projectUniqueName": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.csproj",
       "projectName": "Buon-Calice",
-      "projectPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.csproj",
+      "projectPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.csproj",
       "packagesPath": "C:\\Users\\mero0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\obj\\",
+      "outputPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
