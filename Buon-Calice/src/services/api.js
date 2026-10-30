@@ -1,4 +1,4 @@
-// Puerto asignado a tu Web API de .NET (Ajusta la URL si en producción cambia)
+// Puerto asignado a tu Web API de .NET
 const API_BASE_URL = 'https://localhost:7263/api';
 
 // Exportación secundaria para mantener compatibilidad
@@ -37,12 +37,10 @@ export const guardarProducto = async (producto) => {
     return await res.json();
 };
 
-// Actualizar únicamente el stock de un producto (usa la ruta PUT /api/productos/{id})
+// Actualizar únicamente el stock de un producto
 export const actualizarStock = async (idProducto, nuevoStock) => {
-    // 1. Obtenemos el producto actual para no perder sus demás datos (nombre, precio, etc.)
     const productoActual = await getProductoPorId(idProducto);
 
-    // 2. Modificamos el stock
     const productoActualizado = {
         ...productoActual,
         stock: Number(nuevoStock)
@@ -54,10 +52,10 @@ export const actualizarStock = async (idProducto, nuevoStock) => {
         body: JSON.stringify(productoActualizado)
     });
 
-
     if (!res.ok) throw new Error('Error al actualizar el stock del producto');
     return await res.json();
 };
+
 // Eliminar un producto de forma física en SQL Server (DELETE)
 export const eliminarProducto = async (id) => {
     const res = await fetch(`${API_BASE_URL}/productos/${id}`, {
@@ -70,13 +68,19 @@ export const eliminarProducto = async (id) => {
 // --- USUARIOS ---
 
 export const loginUsuario = async (correo, password) => {
-    const res = await fetch(`${API_BASE_URL}/usuarios/login`, {
+    const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo, password })
     });
-    if (!res.ok) throw new Error('Credenciales incorrectas');
-    return await res.json();
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        throw new Error(data.mensaje || 'Credenciales incorrectas');
+    }
+
+    return data;
 };
 
 // --- PEDIDOS ---
@@ -102,4 +106,36 @@ export const getPedidos = async () => {
     const res = await fetch(`${API_BASE_URL}/pedidos`);
     if (!res.ok) throw new Error('Error al consultar pedidos');
     return await res.json();
+};
+
+// Eliminar un pedido en SQL Server
+export const eliminarPedido = async (idPedido) => {
+    const res = await fetch(`${API_BASE_URL}/pedidos/${idPedido}`, {
+        method: 'DELETE'
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+        throw new Error(data.mensaje || 'Error al eliminar el pedido en el servidor');
+    }
+
+    return data;
+};
+
+// Actualizar estado de un pedido en SQL Server
+export const actualizarEstadoPedido = async (idPedido, nuevoEstado) => {
+    const res = await fetch(`${API_BASE_URL}/pedidos/${idPedido}/estado`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ estado: nuevoEstado })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+        throw new Error(data.mensaje || 'Error al actualizar el estado del pedido');
+    }
+
+    return data;
 };

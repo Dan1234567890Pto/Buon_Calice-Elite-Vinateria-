@@ -1,34 +1,34 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+    getProductos,
+    getProductoPorId,
+    guardarProducto,
+    eliminarProducto,
+    getPedidos,
+    eliminarPedido,
+    actualizarEstadoPedido
+} from '../../services/api';
 
 export default function EmpleadoView() {
-    // Estados para productos y tabla CRUD
     const [productos, setProductos] = useState([]);
     const [cargandoProductos, setCargandoProductos] = useState(true);
     const [errorProductos, setErrorProductos] = useState('');
+
+    const [pedidos, setPedidos] = useState([]);
+    const [cargandoPedidos, setCargandoPedidos] = useState(true);
+    const [errorPedidos, setErrorPedidos] = useState('');
+    const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
+
+    const [pedidosEliminados, setPedidosEliminados] = useState([]);
+
     const [productoEditandoId, setProductoEditandoId] = useState(null);
-
-    // Lista de pedidos acumulados
-    const [pedidos, setPedidos] = useState([
-        { id: '#BC-BF2EA9C4', usuarioId: 1, pago: 'Pagar al recoger', fecha: '26/10/2026, 4:34:54 p.m.', total: '$1350.00', articulos: 0, estado: 'PENDIENTE' },
-        { id: '#BC-DED5B9AE', usuarioId: 2, pago: 'Tarjeta de Crédito', fecha: '26/10/2026, 4:40:10 p.m.', total: '$1700.00', articulos: 2, estado: 'PENDIENTE' },
-        { id: '#BC-37450697', usuarioId: 3, pago: 'Pagar al recoger', fecha: '26/10/2026, 5:10:00 p.m.', total: '$2100.00', articulos: 1, estado: 'PENDIENTE' },
-        { id: '#BC-25393BA4', usuarioId: 4, pago: 'Efectivo', fecha: '26/10/2026, 5:25:30 p.m.', total: '$2250.00', articulos: 3, estado: 'PENDIENTE' },
-        { id: '#BC-A74495C9', usuarioId: 5, pago: 'Pagar al recoger', fecha: '26/10/2026, 6:00:15 p.m.', total: '$3250.00', articulos: 4, estado: 'PENDIENTE' }
-    ]);
-
-    // Estado del pedido actualmente seleccionado
-    const [pedidoSeleccionado, setPedidoSeleccionado] = useState(pedidos[0]);
-
-    // Estados de interfaz adicionales
     const [idBusqueda, setIdBusqueda] = useState('');
     const [productoBuscado, setProductoBuscado] = useState(null);
     const [codigoPedidoBorrar, setCodigoPedidoBorrar] = useState('');
 
-    // Datos del usuario desde localStorage
     const usuarioSesion = JSON.parse(localStorage.getItem('usuario_admin')) || { nombre: 'Administrador Élite' };
 
-    // Estado del formulario de productos
     const [formData, setFormData] = useState({
         nombre: '',
         categoria: 'Whisky',
@@ -39,20 +39,49 @@ export default function EmpleadoView() {
     });
 
     const navigate = useNavigate();
-    const API_URL = 'https://localhost:7263/api/Productos';
 
-    // Cargar productos al montar
     useEffect(() => {
         obtenerProductos();
-    }, []);
+        obtenerPedidos();
+
+        const intervalo = setInterval(() => {
+            obtenerPedidos();
+        }, 5000);
+
+        return () => clearInterval(intervalo);
+    }, [pedidosEliminados]);
+
+    const obtenerPedidos = async () => {
+        try {
+            const data = await getPedidos();
+
+            const pedidosValidos = (data || []).filter(p => {
+                const idPed = (p.idPedido || p.id_pedido || p.id || '').toString();
+                const cod = (p.codigo || '').toUpperCase();
+                return !pedidosEliminados.includes(idPed) && !pedidosEliminados.includes(cod);
+            });
+
+            setPedidos(pedidosValidos);
+
+            if (pedidosValidos.length > 0 && !pedidoSeleccionado) {
+                setPedidoSeleccionado({
+                    ...pedidosValidos[0],
+                    idPedido: pedidosValidos[0].idPedido || pedidosValidos[0].id_pedido || pedidosValidos[0].id
+                });
+            }
+        } catch (err) {
+            console.error(err);
+            setErrorPedidos('No se pudieron obtener los pedidos en tiempo real.');
+        } finally {
+            setCargandoPedidos(false);
+        }
+    };
 
     const obtenerProductos = async () => {
         setCargandoProductos(true);
         try {
-            const response = await fetch(API_URL);
-            if (!response.ok) throw new Error('Error al conectar con SQL Server');
-            const data = await response.json();
-            setProductos(data);
+            const data = await getProductos(false);
+            setProductos(data || []);
         } catch (err) {
             console.error(err);
             setErrorProductos('No se pudo cargar el inventario de productos.');
@@ -62,56 +91,90 @@ export default function EmpleadoView() {
     };
 
     const handleSeleccionarPedido = (pedido) => {
-        setPedidoSeleccionado(pedido);
+        setPedidoSeleccionado({
+            ...pedido,
+            idPedido: pedido.idPedido || pedido.id_pedido || pedido.id
+        });
     };
 
-    const handleCambiarEstadoPedido = (nuevoEstado) => {
+    const handleCambiarEstadoPedido = async (nuevoEstado) => {
         if (!pedidoSeleccionado) return;
 
-        const pedidosActualizados = pedidos.map(p =>
-            p.id === pedidoSeleccionado.id ? { ...p, estado: nuevoEstado } : p
-        );
+        const idReal = pedidoSeleccionado.idPedido || pedidoSeleccionado.id_pedido || pedidoSeleccionado.id;
 
-        setPedidos(pedidosActualizados);
-        setPedidoSeleccionado({ ...pedidoSeleccionado, estado: nuevoEstado });
+        if (!idReal || isNaN(Number(idReal))) {
+            alert(`⚠️ ID numérico inválido (${idReal}). Selecciona nuevamente el pedido.`);
+            return;
+        }
+
+        try {
+            await actualizarEstadoPedido(idReal, nuevoEstado);
+            setPedidoSeleccionado(prev => ({ ...prev, estado: nuevoEstado }));
+            await obtenerPedidos();
+        } catch (err) {
+            console.error('Error al cambiar estado:', err);
+            alert('⚠️ No se pudo guardar el estado: ' + err.message);
+        }
     };
 
-    const handleEntregarYBorrar = (e) => {
+    const handleEntregarYBorrar = async (e) => {
         e.preventDefault();
         if (!codigoPedidoBorrar) return;
 
-        const codigoFormateado = codigoPedidoBorrar.trim().toUpperCase();
-        const existe = pedidos.some(p => p.id.replace('#', '') === codigoFormateado || p.id === codigoFormateado);
+        const entradaLimpia = codigoPedidoBorrar.trim().toUpperCase();
 
-        if (existe) {
-            const nuevosPedidos = pedidos.filter(p => p.id.replace('#', '') !== codigoFormateado && p.id !== codigoFormateado);
-            setPedidos(nuevosPedidos);
-            if (pedidoSeleccionado && (pedidoSeleccionado.id.replace('#', '') === codigoFormateado || pedidoSeleccionado.id === codigoFormateado)) {
-                setPedidoSeleccionado(nuevosPedidos[0] || null);
+        const pedidoEncontrado = pedidos.find(p => {
+            const cod = (p.codigo || '').toUpperCase();
+            const idPed = (p.idPedido || p.id_pedido || p.id || '').toString();
+            return cod === entradaLimpia || cod === `BC-${entradaLimpia}` || `BC-${cod}` === entradaLimpia || idPed === entradaLimpia;
+        });
+
+        if (!pedidoEncontrado) {
+            alert('⚠️ No se encontró ningún pedido con ese código en la lista.');
+            return;
+        }
+
+        const idReal = (pedidoEncontrado.idPedido || pedidoEncontrado.id_pedido || pedidoEncontrado.id || '').toString();
+        const codigoReal = (pedidoEncontrado.codigo || '').toUpperCase();
+
+        try {
+            // Eliminación física en SQL Server
+            await eliminarPedido(idReal);
+
+            setPedidosEliminados(prev => [...prev, idReal, codigoReal, entradaLimpia]);
+
+            const nuevaLista = pedidos.filter(p => {
+                const idP = (p.idPedido || p.id_pedido || p.id || '').toString();
+                const codP = (p.codigo || '').toUpperCase();
+                return idP !== idReal && codP !== codigoReal && codP !== entradaLimpia;
+            });
+
+            setPedidos(nuevaLista);
+
+            if (pedidoSeleccionado && ((pedidoSeleccionado.idPedido || pedidoSeleccionado.id_pedido || pedidoSeleccionado.id || '').toString() === idReal)) {
+                setPedidoSeleccionado(nuevaLista.length > 0 ? nuevaLista[0] : null);
             }
-            alert(`Pedido ${codigoPedidoBorrar} entregado y eliminado.`);
+
+            alert(`✅ Pedido ${entradaLimpia} entregado y eliminado de SQL Server.`);
             setCodigoPedidoBorrar('');
-        } else {
-            alert('No se encontró ningún pedido con ese código.');
+        } catch (err) {
+            alert('⚠️ Error al eliminar pedido en la base de datos: ' + err.message);
         }
     };
 
     const handleInputChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleEditarProducto = (prod) => {
-        const id = prod.idProducto || prod.id_producto;
+        const id = prod.idProducto || prod.id_producto || prod.id;
         setProductoEditandoId(id);
         setFormData({
             nombre: prod.nombre || '',
             categoria: prod.categoria || 'Whisky',
             precio: prod.precio || '',
             stock: prod.stock || '',
-            imagen: prod.imagen || prod.urlImagen || '',
+            imagen: prod.imagen || prod.urlImagen || prod.icono || '',
             descripcion: prod.descripcion || ''
         });
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -125,16 +188,12 @@ export default function EmpleadoView() {
     const handleGuardarProducto = async (e) => {
         e.preventDefault();
         try {
-            const method = productoEditandoId ? 'PUT' : 'POST';
-            const url = productoEditandoId ? `${API_URL}/${productoEditandoId}` : API_URL;
+            const payload = {
+                ...formData,
+                ...(productoEditandoId && { idProducto: productoEditandoId })
+            };
 
-            const response = await fetch(url, {
-                method: method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) throw new Error('Error al procesar el producto');
+            await guardarProducto(payload);
 
             alert(productoEditandoId ? 'Producto actualizado en SQL Server' : 'Producto registrado en SQL Server');
             handleCancelarEditar();
@@ -148,9 +207,7 @@ export default function EmpleadoView() {
         if (!window.confirm(`¿Estás seguro de eliminar el producto #${id}?`)) return;
 
         try {
-            const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-            if (!response.ok) throw new Error('Error al eliminar producto');
-
+            await eliminarProducto(id);
             alert('Producto eliminado de SQL Server');
             obtenerProductos();
         } catch (err) {
@@ -162,9 +219,7 @@ export default function EmpleadoView() {
         e.preventDefault();
         if (!idBusqueda) return;
         try {
-            const response = await fetch(`${API_URL}/${idBusqueda}`);
-            if (!response.ok) throw new Error('Producto no encontrado');
-            const data = await response.json();
+            const data = await getProductoPorId(idBusqueda);
             setProductoBuscado(data);
         } catch (err) {
             alert(err.message);
@@ -180,7 +235,6 @@ export default function EmpleadoView() {
     return (
         <div style={{ padding: '2rem', backgroundColor: '#0D0B0A', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif', maxWidth: '850px', margin: '0 auto' }}>
 
-            {/* ENCABEZADO DE LA VISTA */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                 <div>
                     <span style={{ fontSize: '0.75rem', color: '#C5A059', letterSpacing: '0.1em', fontWeight: 'bold' }}>🟢 PANEL DE EMPLEADO</span>
@@ -192,54 +246,70 @@ export default function EmpleadoView() {
                 </button>
             </div>
 
-            {/* DASHBOARD DE PEDIDOS ACUMULADOS */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em' }}>📜 DASHBOARD DE PEDIDOS ACUMULADOS ({pedidos.length})</span>
-                    <span style={{ fontSize: '0.75rem', color: '#666' }}>Haz clic en un pedido para atenderlo</span>
+                    <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em' }}>
+                        📜 DASHBOARD DE PEDIDOS ACUMULADOS ({pedidos.length})
+                    </span>
+                    <button onClick={obtenerPedidos} style={{ background: 'none', border: 'none', color: '#C5A059', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 'bold' }}>
+                        🔄 Recargar Pedidos
+                    </button>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    {pedidos.map((ped) => {
-                        const esSeleccionado = pedidoSeleccionado && pedidoSeleccionado.id === ped.id;
-                        return (
-                            <div
-                                key={ped.id}
-                                onClick={() => handleSeleccionarPedido(ped)}
-                                style={{
-                                    backgroundColor: '#0D0B0A',
-                                    padding: '1rem',
-                                    borderRadius: '12px',
-                                    border: esSeleccionado ? '1px solid #C5A059' : '1px solid #26201B',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    cursor: 'pointer',
-                                    transition: 'border-color 0.2s'
-                                }}
-                            >
-                                <div>
-                                    <strong style={{ color: '#C5A059', display: 'block', marginBottom: '0.25rem' }}>{ped.id}</strong>
-                                    <span style={{ fontSize: '0.75rem', color: '#888', display: 'block' }}>{ped.articulos} artículo(s)</span>
-                                    <span style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 'bold' }}>Total: {ped.total}</span>
+                {cargandoPedidos && pedidos.length === 0 ? (
+                    <p style={{ color: '#aaa', textAlign: 'center', margin: '1rem 0' }}>Cargando pedidos de SQL Server...</p>
+                ) : errorPedidos && pedidos.length === 0 ? (
+                    <p style={{ color: '#fda4af', textAlign: 'center', margin: '1rem 0' }}>{errorPedidos}</p>
+                ) : pedidos.length === 0 ? (
+                    <p style={{ color: '#aaa', textAlign: 'center', margin: '1rem 0' }}>No hay pedidos registrados por el momento.</p>
+                ) : (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        {pedidos.map((ped) => {
+                            const idCodigo = ped.codigo || `#BC-${ped.idPedido || ped.id}`;
+                            const idNum = ped.idPedido || ped.id_pedido || ped.id;
+                            const esSeleccionado = pedidoSeleccionado && (
+                                (pedidoSeleccionado.idPedido && pedidoSeleccionado.idPedido === idNum) ||
+                                (pedidoSeleccionado.codigo && pedidoSeleccionado.codigo === ped.codigo)
+                            );
+
+                            return (
+                                <div
+                                    key={idNum || ped.codigo || Math.random()}
+                                    onClick={() => handleSeleccionarPedido(ped)}
+                                    style={{
+                                        backgroundColor: '#0D0B0A',
+                                        padding: '1rem',
+                                        borderRadius: '12px',
+                                        border: esSeleccionado ? '1px solid #C5A059' : '1px solid #26201B',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <div>
+                                        <strong style={{ color: '#C5A059', display: 'block', marginBottom: '0.25rem' }}>{idCodigo}</strong>
+                                        <span style={{ fontSize: '0.75rem', color: '#888', display: 'block' }}>Cliente: {ped.cliente || ped.nombreCliente || `Usuario #${ped.usuarioId || ''}`}</span>
+                                        <span style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 'bold' }}>Total: ${ped.total}</span>
+                                    </div>
+                                    <span style={{
+                                        backgroundColor: ['LISTO', 'ENTREGADO'].includes((ped.estado || '').toUpperCase()) ? 'rgba(34, 197, 94, 0.15)' : ['EN PREPARACION', 'EN_PREPARACION'].includes((ped.estado || '').toUpperCase()) ? 'rgba(197, 160, 89, 0.15)' : 'rgba(37, 99, 235, 0.15)',
+                                        color: ['LISTO', 'ENTREGADO'].includes((ped.estado || '').toUpperCase()) ? '#4ade80' : ['EN PREPARACION', 'EN_PREPARACION'].includes((ped.estado || '').toUpperCase()) ? '#C5A059' : '#60a5fa',
+                                        padding: '0.25rem 0.6rem',
+                                        borderRadius: '12px',
+                                        fontSize: '0.7rem',
+                                        fontWeight: 'bold',
+                                        textTransform: 'uppercase'
+                                    }}>
+                                        {ped.estado || 'PENDIENTE'}
+                                    </span>
                                 </div>
-                                <span style={{
-                                    backgroundColor: ped.estado === 'Listo' ? 'rgba(34, 197, 94, 0.15)' : ped.estado === 'En Preparación' ? 'rgba(197, 160, 89, 0.15)' : 'rgba(37, 99, 235, 0.15)',
-                                    color: ped.estado === 'Listo' ? '#4ade80' : ped.estado === 'En Preparación' ? '#C5A059' : '#60a5fa',
-                                    padding: '0.25rem 0.6rem',
-                                    borderRadius: '12px',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 'bold'
-                                }}>
-                                    {ped.estado}
-                                </span>
-                            </div>
-                        );
-                    })}
-                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
 
-            {/* VERIFICAR / ENTREGAR PEDIDO POR CÓDIGO */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em' }}>VERIFICAR / ENTREGAR PEDIDO POR CÓDIGO</span>
@@ -259,51 +329,45 @@ export default function EmpleadoView() {
                 </form>
             </div>
 
-            {/* ATENDIENDO PEDIDO SELECCIONADO */}
             {pedidoSeleccionado && (
                 <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <span style={{ fontSize: '0.75rem', color: '#888', letterSpacing: '0.05em' }}>ATENDIENDO PEDIDO</span>
-                        <span style={{ backgroundColor: 'rgba(197, 160, 89, 0.2)', color: '#C5A059', padding: '0.25rem 0.75rem', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold' }}>
-                            {pedidoSeleccionado.estado}
+                        <span style={{ backgroundColor: 'rgba(197, 160, 89, 0.2)', color: '#C5A059', padding: '0.25rem 0.75rem', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase' }}>
+                            {pedidoSeleccionado.estado || 'PENDIENTE'}
                         </span>
                     </div>
 
-                    <h2 style={{ fontFamily: 'serif', color: '#C5A059', margin: '0 0 1.5rem 0', fontSize: '2rem' }}>{pedidoSeleccionado.id}</h2>
+                    <h2 style={{ fontFamily: 'serif', color: '#C5A059', margin: '0 0 1.5rem 0', fontSize: '2rem' }}>
+                        {pedidoSeleccionado.codigo || `#BC-${pedidoSeleccionado.idPedido || pedidoSeleccionado.id}`}
+                    </h2>
 
                     <div style={{ backgroundColor: '#0D0B0A', padding: '1rem', borderRadius: '8px', border: '1px solid #26201B', marginBottom: '1.5rem', fontSize: '0.85rem' }}>
-                        <p style={{ margin: '0 0 0.4rem 0' }}><strong>Usuario ID:</strong> {pedidoSeleccionado.usuarioId}</p>
-                        <p style={{ margin: '0 0 0.4rem 0' }}><strong>Método de Pago:</strong> {pedidoSeleccionado.pago}</p>
-                        <p style={{ margin: 0 }}><strong>Fecha:</strong> {pedidoSeleccionado.fecha}</p>
-                    </div>
-
-                    <div style={{ marginBottom: '1.5rem' }}>
-                        <span style={{ fontSize: '0.75rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold' }}>DETALLE DE ARTÍCULOS</span>
-                        <div style={{ backgroundColor: '#0D0B0A', padding: '0.75rem', borderRadius: '8px', marginTop: '0.5rem', border: '1px solid #26201B', fontSize: '0.85rem', color: '#aaa' }}>
-                            {pedidoSeleccionado.articulos > 0 ? `${pedidoSeleccionado.articulos} producto(s) asignado(s) a este pedido.` : 'Sin detalles de artículos registrados.'}
-                        </div>
+                        <p style={{ margin: '0 0 0.4rem 0' }}><strong>Cliente / Usuario:</strong> {pedidoSeleccionado.cliente || pedidoSeleccionado.nombreCliente || pedidoSeleccionado.usuarioId || 'General'}</p>
+                        <p style={{ margin: '0 0 0.4rem 0' }}><strong>Método de Pago:</strong> {pedidoSeleccionado.metodoPago || 'Pagar al recoger'}</p>
+                        <p style={{ margin: 0 }}><strong>Fecha:</strong> {pedidoSeleccionado.fechaPedido ? new Date(pedidoSeleccionado.fechaPedido).toLocaleString() : 'Fecha no registrada'}</p>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0D0B0A', padding: '1rem', borderRadius: '8px', border: '1px solid #26201B', marginBottom: '1.5rem' }}>
                         <span style={{ fontWeight: 'bold', letterSpacing: '0.05em' }}>TOTAL</span>
-                        <span style={{ color: '#C5A059', fontWeight: 'bold', fontSize: '1.2rem' }}>{pedidoSeleccionado.total}</span>
+                        <span style={{ color: '#C5A059', fontWeight: 'bold', fontSize: '1.2rem' }}>${pedidoSeleccionado.total}</span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
-                        <button onClick={() => handleCambiarEstadoPedido('En Preparación')} style={{ padding: '0.75rem', backgroundColor: 'rgba(197, 160, 89, 0.15)', color: '#C5A059', border: '1px solid #C5A059', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                        <button onClick={() => handleCambiarEstadoPedido('EN PREPARACION')} style={{ padding: '0.75rem', backgroundColor: 'rgba(197, 160, 89, 0.15)', color: '#C5A059', border: '1px solid #C5A059', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
                             👨‍🍳 En Preparación
                         </button>
-                        <button onClick={() => handleCambiarEstadoPedido('Listo')} style={{ padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid #22c55e', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                        <button onClick={() => handleCambiarEstadoPedido('LISTO')} style={{ padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid #22c55e', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
                             ✅ Listo
                         </button>
-                        <button onClick={() => handleCambiarEstadoPedido('No Entregado')} style={{ padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: '1px solid #ef4444', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                            ⚠️ No Entregado
+                        <button onClick={() => handleCambiarEstadoPedido('CANCELADO')} style={{ padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: '1px solid #ef4444', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            ⚠️ Cancelado
                         </button>
                     </div>
                 </div>
             )}
 
-            {/* SECCIÓN DE INVENTARIO Y MODIFICACIÓN DE PRODUCTOS */}
+            {/* SECCIÓN DE INVENTARIO */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
                     📦 INVENTARIO EN EXISTENCIA (SQL SERVER)
@@ -328,7 +392,7 @@ export default function EmpleadoView() {
                             </thead>
                             <tbody>
                                 {productos.map((prod) => {
-                                    const id = prod.idProducto || prod.id_producto;
+                                    const id = prod.idProducto || prod.id_producto || prod.id;
                                     return (
                                         <tr key={id} style={{ borderBottom: '1px solid #26201B' }}>
                                             <td style={{ padding: '0.75rem' }}>#{id}</td>
@@ -359,7 +423,7 @@ export default function EmpleadoView() {
                 )}
             </div>
 
-            {/* SECCIÓN CONSULTA POR ID */}
+            {/* CONSULTA POR ID */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
                     🔍 CONSULTA POR ID (SQL SERVER)
@@ -384,7 +448,7 @@ export default function EmpleadoView() {
                 )}
             </div>
 
-            {/* SECCIÓN AGREGAR / EDITAR NUEVO PRODUCTO */}
+            {/* FORMULARIO PRODUCTOS */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B' }}>
                 <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
                     {productoEditandoId ? `✏️ EDITAR PRODUCTO #${productoEditandoId}` : '✨ AGREGAR NUEVO PRODUCTO'}
@@ -404,36 +468,39 @@ export default function EmpleadoView() {
                                 <option value="Tequila">Tequila</option>
                                 <option value="Ron">Ron</option>
                                 <option value="Cerveza">Cerveza</option>
+                                <option value="Mezcal">Mezcal</option>
+                                <option value="Espumoso">Espumoso</option>
                             </select>
                         </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>PRECIO ($)</label>
-                            <input type="number" step="0.01" name="precio" value={formData.precio} onChange={handleInputChange} required placeholder="0.00" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>PRECIO</label>
+                            <input type="number" name="precio" value={formData.precio} onChange={handleInputChange} required placeholder="0.00" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
                         </div>
                         <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>STOCK INICIAL</label>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>STOCK</label>
                             <input type="number" name="stock" value={formData.stock} onChange={handleInputChange} required placeholder="0" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
-                        </div>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>URL IMAGEN / ÍCONO</label>
-                            <input type="text" name="imagen" value={formData.imagen} onChange={handleInputChange} placeholder="https://..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
                         </div>
                     </div>
 
                     <div>
+                        <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>URL IMAGEN O ICONO</label>
+                        <input type="text" name="imagen" value={formData.imagen} onChange={handleInputChange} placeholder="https://..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
+                    </div>
+
+                    <div>
                         <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>DESCRIPCIÓN</label>
-                        <textarea name="descripcion" value={formData.descripcion} onChange={handleInputChange} rows="3" placeholder="Notas de cata o detalles del producto..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }}></textarea>
+                        <textarea name="descripcion" value={formData.descripcion} onChange={handleInputChange} rows="3" placeholder="Descripción breve..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }}></textarea>
                     </div>
 
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                        <button type="submit" style={{ flex: 1, padding: '1rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                            {productoEditandoId ? 'Guardar Cambios en SQL Server' : 'Registrar Producto en SQL Server'}
+                        <button type="submit" style={{ flex: 1, padding: '0.85rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            {productoEditandoId ? 'Guardar Cambios' : 'Agregar Producto'}
                         </button>
                         {productoEditandoId && (
-                            <button type="button" onClick={handleCancelarEditar} style={{ padding: '1rem 2rem', backgroundColor: '#4b5563', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            <button type="button" onClick={handleCancelarEditar} style={{ padding: '0.85rem 1.5rem', backgroundColor: 'transparent', color: '#aaa', border: '1px solid #382E26', borderRadius: '8px', cursor: 'pointer' }}>
                                 Cancelar
                             </button>
                         )}

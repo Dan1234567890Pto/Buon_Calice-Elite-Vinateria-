@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Buon_Calice.Data;
 using Buon_Calice.Models;
+using Microsoft.Data.SqlClient;
 
 namespace Buon_Calice.Controllers
 {
     [ApiController]
-    [Route("api/usuarios")]
+    [Route("api/[controller]")]
+    [Route("api/auth")] // Habilita la ruta /api/auth/login para React
     public class UsuariosController : ControllerBase
     {
         private readonly UsuariosData _usuariosData;
@@ -15,47 +17,59 @@ namespace Buon_Calice.Controllers
             _usuariosData = usuariosData;
         }
 
-        // POST: api/usuarios/login
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO login)
+        public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             try
             {
-                var usuario = await _usuariosData.AutenticarUsuario(login);
-                if (usuario == null)
-                    return Unauthorized(new { mensaje = "Correo o contraseña incorrectos" });
-
-                return Ok(new
+                if (dto == null || string.IsNullOrEmpty(dto.Correo) || string.IsNullOrEmpty(dto.Password))
                 {
-                    exito = true,
-                    usuario = new
+                    return BadRequest(new { mensaje = "Credenciales incompletas." });
+                }
+
+                var usuario = await _usuariosData.ValidarLogin(dto.Correo, dto.Password);
+                if (usuario != null)
+                {
+                    return Ok(new
                     {
-                        id = usuario.IdUsuario,
+                        idUsuario = usuario.IdUsuario,
                         nombre = usuario.Nombre,
                         correo = usuario.Correo,
-                        rol = usuario.Rol
-                    }
-                });
+                        rol = usuario.Rol.ToLower() // Se envía en minúsculas ('admin')
+                    });
+                }
+
+                return Unauthorized(new { mensaje = "Correo o contraseña incorrectos." });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = ex.Message, inner = ex.InnerException?.Message });
+                return StatusCode(500, new { error = ex.Message });
             }
         }
 
-        // POST: api/usuarios/registrar
+        [HttpPost("registro")]
         [HttpPost("registrar")]
-        public async Task<IActionResult> Registrar([FromBody] Usuario usuario)
+        public async Task<IActionResult> Registro([FromBody] UsuarioRegistroDTO dto)
         {
             try
             {
-                var exito = await _usuariosData.RegistrarUsuario(usuario);
-                if (exito) return Ok(new { mensaje = "Usuario registrado exitosamente" });
-                return BadRequest("No se pudo registrar el usuario.");
+                if (dto == null || string.IsNullOrEmpty(dto.Correo) || string.IsNullOrEmpty(dto.Password))
+                {
+                    return BadRequest(new { mensaje = "El correo y la contraseña son obligatorios." });
+                }
+
+                var exito = await _usuariosData.RegistrarUsuario(dto);
+                if (exito) return Ok(new { mensaje = "Usuario registrado exitosamente con cifrado seguro." });
+
+                return BadRequest(new { mensaje = "No se pudo registrar el usuario." });
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                return BadRequest(new { mensaje = "Este correo electrónico ya se encuentra registrado." });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = ex.Message, inner = ex.InnerException?.Message });
+                return StatusCode(500, new { error = ex.Message });
             }
         }
     }

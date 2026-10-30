@@ -4,8 +4,10 @@
     "\\Buon-Calice",
     "\\src",
     "\\src\\components",
-    "\\src\\components\\Empleado"
+    "\\src\\components\\Clientes",
+    "\\src\\components\\Empleado",
+    "\\src\\services"
   ],
-  "SelectedNode": "\\src\\components\\Empleado\\EmpleadoView.jsx",
+  "SelectedNode": "\\src\\components\\Clientes\\PerfilClienteView.jsx",
   "PreviewInSolutionExplorer": false
 }

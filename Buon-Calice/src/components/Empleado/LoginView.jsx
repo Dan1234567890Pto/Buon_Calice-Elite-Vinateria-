@@ -25,21 +25,23 @@ export default function LoginView() {
                 throw new Error(dataError?.mensaje || 'Credenciales incorrectas');
             }
 
-            const usuario = await response.json();
+            const data = await response.json();
 
-            // Normalización de claves enviadas desde C# (mayúsculas/minúsculas)
+            // Extrae el objeto usuario ya sea plano o anidado
+            const usuarioBackend = data.usuario || data;
+            const rawRol = usuarioBackend.rol || usuarioBackend.Rol || 'cliente';
+
             const usuarioNormalizado = {
-                ...usuario,
-                rol: usuario.rol || usuario.Rol,
-                nombre: usuario.nombre || usuario.Nombre,
-                correo: usuario.correo || usuario.Correo,
-                idUsuario: usuario.idUsuario || usuario.IdUsuario
+                idUsuario: usuarioBackend.idUsuario || usuarioBackend.IdUsuario,
+                nombre: usuarioBackend.nombre || usuarioBackend.Nombre,
+                correo: usuarioBackend.correo || usuarioBackend.Correo,
+                rol: rawRol.toString().trim().toLowerCase()
             };
 
-            // Guardar usuario autenticado
+            // Guarda el objeto limpio para que ProtectedRoute lea el rol
             localStorage.setItem('usuario_admin', JSON.stringify(usuarioNormalizado));
+            localStorage.setItem('usuario', JSON.stringify(usuarioNormalizado));
 
-            // Redirigir al panel de administración
             navigate('/admin');
 
         } catch (err) {

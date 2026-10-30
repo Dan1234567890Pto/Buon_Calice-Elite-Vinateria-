@@ -8,7 +8,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("PermitirReact", policy =>
         policy.WithOrigins(
             "http://localhost:5173",
+            "https://localhost:5173", // <-- AGREGADO: Necesario para el entorno HTTPS de Vite
             "http://localhost:5174",
+            "https://localhost:5174",
             "https://localhost:7263",
             "https://localhost:7001",
             "http://localhost:5000"
@@ -36,12 +38,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Activar CORS
+// Activar CORS (Debe ir antes de UseAuthorization)
 app.UseCors("PermitirReact");
+
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getProductos, crearPedido } from '../../services/api';
 import './Cliente.css';
 
-// --- COMPONENTE AUXILIAR (FUERA DEL COMPONENTE PRINCIPAL) ---
 const RenderImagenBotella = ({ url, alt, className = "w-full h-full object-contain p-2" }) => {
     const esUrlValida = typeof url === 'string' && (
         url.startsWith('http://') ||
@@ -32,6 +32,7 @@ const RenderImagenBotella = ({ url, alt, className = "w-full h-full object-conta
 };
 
 export default function ClienteView() {
+    const navigate = useNavigate();
     const [seccion, setSeccion] = useState('sec-catalogo');
     const [productos, setProductos] = useState([]);
     const [cargandoApi, setCargandoApi] = useState(true);
@@ -42,6 +43,8 @@ export default function ClienteView() {
     const [busqueda, setBusqueda] = useState('');
     const [mostrarBuscador, setMostrarBuscador] = useState(false);
     const [splashVisible, setSplashVisible] = useState(true);
+
+    const [usuarioSesion, setUsuarioSesion] = useState(null);
 
     const [ultimoPedido, setUltimoPedido] = useState(() => {
         try {
@@ -68,6 +71,25 @@ export default function ClienteView() {
             setSplashVisible(false);
         }, 1500);
 
+        // Busca prioritariamente la sesión exclusiva de clientes
+        const clienteGuardado = localStorage.getItem('cliente_buoncalice') || localStorage.getItem('usuario_cliente');
+        if (clienteGuardado) {
+            try {
+                const parsed = JSON.parse(clienteGuardado);
+                setUsuarioSesion(parsed);
+                setCliNombre(parsed.nombre || '');
+                setCliCorreo(parsed.correo || '');
+                setCliTelefono(parsed.telefono || '');
+                setPerfil({
+                    nombre: parsed.nombre || 'Sin nombre',
+                    correo: parsed.correo || 'Sin correo',
+                    telefono: parsed.telefono || 'Sin teléfono'
+                });
+            } catch (e) {
+                console.error("Error al leer la sesión del cliente", e);
+            }
+        }
+
         (async () => {
             try {
                 setCargandoApi(true);
@@ -91,6 +113,33 @@ export default function ClienteView() {
 
         return () => clearTimeout(timer);
     }, []);
+
+    // Polling para rastrear pedidos
+    useEffect(() => {
+        if (!ultimoPedido) return;
+
+        const idBuscar = ultimoPedido.idPedido || ultimoPedido.id_pedido || ultimoPedido.id;
+        if (!idBuscar) return;
+
+        const interval = setInterval(async () => {
+            try {
+                const res = await fetch(`https://localhost:7263/api/Pedidos/${idBuscar}`);
+                if (res.ok) {
+                    const data = await res.json();
+
+                    if (data && data.estado && data.estado !== ultimoPedido.estado) {
+                        const pedidoActualizado = { ...ultimoPedido, estado: data.estado };
+                        setUltimoPedido(pedidoActualizado);
+                        localStorage.setItem('ultimoPedido', JSON.stringify(pedidoActualizado));
+                    }
+                }
+            } catch (err) {
+                console.log('Esperando actualización de estado...');
+            }
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [ultimoPedido]);
 
     const verDetalle = (prod) => {
         setProdSeleccionado(prod);
@@ -122,19 +171,24 @@ export default function ClienteView() {
             return [...prev, { ...prodSeleccionado, cantidad: cantSeleccionada }];
         });
         alert('Producto añadido al carrito.');
-        setSeccion('sec-[#carrito]');
+        setSeccion('sec-carrito');
     };
 
     const confirmarYEnviarPedido = async (e) => {
         e.preventDefault();
-        setPerfil({ nombre: cliNombre, correo: cliCorreo, telefono: cliTelefono });
+
+        const clienteGuardado = localStorage.getItem('cliente_buoncalice') || localStorage.getItem('usuario_cliente');
+        const usuarioActivo = clienteGuardado ? JSON.parse(clienteGuardado) : usuarioSesion;
+
+        const idUsuarioReal = usuarioActivo
+            ? (usuarioActivo.id_usuario || usuarioActivo.idUsuario || usuarioActivo.id)
+            : 1;
 
         const total = carrito.reduce((acc, curr) => acc + curr.precio * curr.cantidad, 0);
-        const codigo = 'X' + Math.floor(1000 + Math.random() * 9000);
 
         try {
             const datosPedidoDTO = {
-                usuarioId: 1,
+                usuarioId: parseInt(idUsuarioReal),
                 metodoPago: metodoPago,
                 productos: carrito.map(item => ({
                     productoId: item.id,
@@ -143,15 +197,23 @@ export default function ClienteView() {
                 }))
             };
 
-            await crearPedido(datosPedidoDTO);
+            const respuestaAPI = await crearPedido(datosPedidoDTO);
+
+            const idGenerado = respuestaAPI?.idPedido || respuestaAPI?.id_pedido || respuestaAPI?.id;
+            const codigoReal = respuestaAPI?.codigo || (idGenerado ? `BC-${idGenerado}` : 'BC-PENDIENTE');
 
             const nuevoPedido = {
-                codigo,
-                cliente: { nombre: cliNombre, correo: cliCorreo, telefono: cliTelefono },
+                idPedido: idGenerado,
+                codigo: codigoReal,
+                cliente: {
+                    nombre: usuarioActivo?.nombre || cliNombre,
+                    correo: usuarioActivo?.correo || cliCorreo,
+                    telefono: usuarioActivo?.telefono || cliTelefono
+                },
                 items: carrito,
-                total,
-                metodoPago,
-                estado: 'recibido'
+                total: respuestaAPI?.total || total,
+                metodoPago: metodoPago,
+                estado: respuestaAPI?.estado || 'PENDIENTE'
             };
 
             localStorage.setItem('ultimoPedido', JSON.stringify(nuevoPedido));
@@ -175,6 +237,17 @@ export default function ClienteView() {
         }
     };
 
+    const handleCerrarSesion = () => {
+        localStorage.removeItem('cliente_buoncalice');
+        localStorage.removeItem('usuario_cliente');
+        setUsuarioSesion(null);
+        setPerfil({ nombre: 'No registrado', correo: 'No registrado', telefono: 'No registrado' });
+        setCliNombre('');
+        setCliCorreo('');
+        setCliTelefono('');
+        alert('Sesión de cliente cerrada correctamente.');
+    };
+
     const categoriasUnicas = ['Todos', 'Whisky', 'Bourbon', 'Vino Tinto', 'Vino Blanco', 'Espumoso', 'Tequila', 'Bacardi'];
 
     const productosFiltrados = productos.filter((p) => {
@@ -193,6 +266,8 @@ export default function ClienteView() {
     }, {});
 
     const totalCarrito = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+
+    const estadoActual = (ultimoPedido?.estado || '').toUpperCase();
 
     return (
         <div className="bg-[#050404] text-[#E2D9CC] min-h-screen pb-24 font-sans selection:bg-[#C5A059] selection:text-black">
@@ -376,7 +451,14 @@ export default function ClienteView() {
 
                         <form onSubmit={confirmarYEnviarPedido} className="bg-[#16120E] border border-[#26201B] p-5 rounded-2xl space-y-4 text-xs">
                             <div className="space-y-3 border-b border-[#26201B] pb-4">
-                                <h4 className="text-[#F3ECE0] font-semibold">1. Datos del Cliente</h4>
+                                <div className="flex justify-between items-center">
+                                    <h4 className="text-[#F3ECE0] font-semibold">1. Datos del Cliente</h4>
+                                    {usuarioSesion && (
+                                        <span className="text-[10px] bg-[#C5A059]/20 text-[#C5A059] px-2 py-0.5 rounded-md font-bold">
+                                            ✓ Sesión Activa
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     required
@@ -454,13 +536,13 @@ export default function ClienteView() {
                                         <span className="text-[10px] text-[#9E8E7E] block">Código: #{ultimoPedido.codigo}</span>
                                         <span className="font-bold text-[#D4AF37]">Total: ${ultimoPedido.total}.00</span>
                                     </div>
-                                    <div className={`flex items-center gap-3 ${['recibido', 'en_preparacion', 'listo', 'entregado'].includes(ultimoPedido.estado) ? 'text-amber-400 font-medium' : 'text-[#9E8E7E]'}`}>
+                                    <div className={`flex items-center gap-3 ${['PENDIENTE', 'EN PREPARACION', 'EN_PREPARACION', 'LISTO', 'ENTREGADO'].includes(estadoActual) ? 'text-amber-400 font-medium' : 'text-[#9E8E7E]'}`}>
                                         ✓ Pedido recibido
                                     </div>
-                                    <div className={`flex items-center gap-3 ${['en_preparacion', 'listo', 'entregado'].includes(ultimoPedido.estado) ? 'text-[#D4AF37] font-bold' : 'text-[#9E8E7E]'}`}>
+                                    <div className={`flex items-center gap-3 ${['EN PREPARACION', 'EN_PREPARACION', 'LISTO', 'ENTREGADO'].includes(estadoActual) ? 'text-[#D4AF37] font-bold' : 'text-[#9E8E7E]'}`}>
                                         ● En Preparación
                                     </div>
-                                    <div className={`flex items-center gap-3 ${['listo', 'entregado'].includes(ultimoPedido.estado) ? 'text-emerald-400 font-bold' : 'text-[#9E8E7E]'}`}>
+                                    <div className={`flex items-center gap-3 ${['LISTO', 'ENTREGADO'].includes(estadoActual) ? 'text-emerald-400 font-bold' : 'text-[#9E8E7E]'}`}>
                                         ○ Listo para recoger
                                     </div>
                                 </>
@@ -476,6 +558,22 @@ export default function ClienteView() {
                             <p className="text-[#9E8E7E]">Nombre: <span className="text-[#F3ECE0] font-medium">{perfil.nombre}</span></p>
                             <p className="text-[#9E8E7E]">Correo: <span className="text-[#F3ECE0] font-medium">{perfil.correo}</span></p>
                             <p className="text-[#9E8E7E]">Teléfono: <span className="text-[#F3ECE0] font-medium">{perfil.telefono}</span></p>
+
+                            {usuarioSesion ? (
+                                <button
+                                    onClick={handleCerrarSesion}
+                                    className="w-full mt-4 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl transition"
+                                >
+                                    CERRAR SESIÓN
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => navigate('/perfil')}
+                                    className="w-full mt-4 bg-[#C5A059] hover:bg-[#B38E47] text-black font-bold py-2.5 rounded-xl transition"
+                                >
+                                    INICIAR SESIÓN / REGISTRARSE
+                                </button>
+                            )}
                         </div>
                     </section>
                 )}
@@ -483,10 +581,22 @@ export default function ClienteView() {
 
             <nav className="fixed bottom-0 left-0 right-0 bg-[#16120E] border-t border-[#26201B] py-3 px-6 z-50">
                 <div className="max-w-md mx-auto flex justify-between items-center text-[10px] text-[#9E8E7E]">
-                    <button onClick={() => setSeccion('sec-catalogo')} className="flex flex-col items-center gap-1 hover:text-[#C5A059]"><span>🏠</span>Inicio</button>
-                    <button onClick={() => setSeccion('sec-estado')} className="flex flex-col items-center gap-1 hover:text-[#C5A059]"><span>📦</span>Pedidos</button>
-                    <button onClick={() => setSeccion('sec-carrito')} className="flex flex-col items-center gap-1 hover:text-[#C5A059]"><span>🛒</span>Carrito</button>
-                    <button onClick={() => setSeccion('sec-perfil')} className="flex flex-col items-center gap-1 hover:text-[#C5A059]"><span>👤</span>Perfil</button>
+                    <button onClick={() => setSeccion('sec-catalogo')} className={`flex flex-col items-center gap-1 ${seccion === 'sec-catalogo' ? 'text-[#C5A059]' : ''}`}>
+                        <span>🍷</span>
+                        <span>Catálogo</span>
+                    </button>
+                    <button onClick={() => setSeccion('sec-carrito')} className={`flex flex-col items-center gap-1 ${seccion === 'sec-carrito' ? 'text-[#C5A059]' : ''}`}>
+                        <span>🛒</span>
+                        <span>Carrito ({carrito.reduce((a, b) => a + b.cantidad, 0)})</span>
+                    </button>
+                    <button onClick={() => setSeccion('sec-estado')} className={`flex flex-col items-center gap-1 ${seccion === 'sec-estado' ? 'text-[#C5A059]' : ''}`}>
+                        <span>📦</span>
+                        <span>Pedidos</span>
+                    </button>
+                    <button onClick={() => setSeccion('sec-perfil')} className={`flex flex-col items-center gap-1 ${seccion === 'sec-perfil' ? 'text-[#C5A059]' : ''}`}>
+                        <span>👤</span>
+                        <span>Perfil</span>
+                    </button>
                 </div>
             </nav>
         </div>

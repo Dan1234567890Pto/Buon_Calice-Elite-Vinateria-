@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ClienteView from './components/Clientes/ClienteView';
+import PerfilClienteView from './components/Clientes/PerfilClienteView';
 import EmpleadoView from './components/Empleado/EmpleadoView';
 import LoginView from './components/Empleado/LoginView';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -11,18 +12,21 @@ export default function App() {
             <div className="app-container">
                 <main className="app-main-content">
                     <Routes>
-                        {/* 1. VISTA CLIENTES (Pública): Cualquier usuario accede sin contraseña */}
+                        {/* Vista principal del cliente (Catálogo público) */}
                         <Route path="/" element={<ClienteView />} />
 
-                        {/* 2. ACCESO ADMINISTRATIVO: Formulario de inicio de sesión */}
+                        {/* Login de clientes / perfil */}
+                        <Route path="/perfil" element={<PerfilClienteView />} />
+
+                        {/* Login administrativo (Empleados / Admins) */}
                         <Route path="/login" element={<LoginView />} />
 
-                        {/* 3. VISTA EMPLEADOS / ADMIN (Protegida): Solo accesible con sesión activa */}
+                        {/* Panel protegido para Admin y Empleados */}
                         <Route element={<ProtectedRoute allowedRoles={['admin', 'empleado']} />}>
                             <Route path="/admin" element={<EmpleadoView />} />
                         </Route>
 
-                        {/* Redirección por defecto ante URLs inexistentes */}
+                        {/* Redirección por defecto al catálogo */}
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>

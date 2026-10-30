@@ -151,3 +151,4 @@ C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\Buon-Calice.pdb
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\Buon-Calice.genruntimeconfig.cache
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\ref\Buon-Calice.dll
+C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Debug\net8.0\BCrypt-Net-Next.dll
