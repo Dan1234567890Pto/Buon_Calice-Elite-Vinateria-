@@ -1,6 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using Buon_Calice.Data;
 using Buon_Calice.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
 using System.Linq;
 
 namespace Buon_Calice.Data
@@ -77,11 +78,12 @@ namespace Buon_Calice.Data
             }
         }
 
-        // 2. Obtener lista de pedidos
+        // 2. Obtener lista de pedidos ACTIVOS (Excluye ENTREGADO y CANCELADO para el panel de trabajo)
         public async Task<List<Pedido>> ObtenerPedidos(int? usuarioId = null)
         {
             var lista = new List<Pedido>();
 
+            // Paso A: Leer solo las cabeceras de pedidos activos
             using (var conn = _conexion.ObtenerConexion())
             {
                 await conn.OpenAsync();
@@ -89,6 +91,7 @@ namespace Buon_Calice.Data
                 string query = @"SELECT id_pedido, codigo, usuario_id, total, estado, metodo_pago, fecha_pedido 
                                 FROM pedidos 
                                 WHERE (@usuario_id IS NULL OR usuario_id = @usuario_id)
+                                  AND estado NOT IN ('ENTREGADO', 'CANCELADO')
                                 ORDER BY fecha_pedido DESC";
 
                 using (var cmd = new SqlCommand(query, conn))
@@ -107,16 +110,53 @@ namespace Buon_Calice.Data
                                 Total = Convert.ToDecimal(reader["total"]),
                                 Estado = reader["estado"].ToString()!,
                                 MetodoPago = reader["metodo_pago"] != DBNull.Value ? reader["metodo_pago"].ToString()! : "Efectivo",
-                                FechaPedido = Convert.ToDateTime(reader["fecha_pedido"])
+                                FechaPedido = Convert.ToDateTime(reader["fecha_pedido"]),
+                                Productos = new List<DetallePedido>()
                             });
                         }
                     }
                 }
             }
+
+            // Paso B: Cargar los productos usando dp.id (columna real de tu tabla SQL)
+            foreach (var pedido in lista)
+            {
+                using (var connDet = _conexion.ObtenerConexion())
+                {
+                    await connDet.OpenAsync();
+
+                    string queryDetalles = @"
+                        SELECT dp.id, dp.pedido_id, dp.producto_id, dp.cantidad, dp.precio_unitario, ISNULL(p.nombre, 'Producto General') AS nombre 
+                        FROM detalle_pedido dp
+                        LEFT JOIN productos p ON dp.producto_id = p.id_producto
+                        WHERE dp.pedido_id = @idPedido";
+
+                    using (var cmdDet = new SqlCommand(queryDetalles, connDet))
+                    {
+                        cmdDet.Parameters.AddWithValue("@idPedido", pedido.IdPedido);
+                        using (var readerDet = await cmdDet.ExecuteReaderAsync())
+                        {
+                            while (await readerDet.ReadAsync())
+                            {
+                                pedido.Productos.Add(new DetallePedido
+                                {
+                                    IdDetalle = Convert.ToInt32(readerDet["id"]),
+                                    PedidoId = Convert.ToInt32(readerDet["pedido_id"]),
+                                    ProductoId = Convert.ToInt32(readerDet["producto_id"]),
+                                    NombreProducto = readerDet["nombre"].ToString()!,
+                                    Cantidad = Convert.ToInt32(readerDet["cantidad"]),
+                                    PrecioUnitario = Convert.ToDecimal(readerDet["precio_unitario"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
             return lista;
         }
 
-        // 3. Actualizar el estado de un pedido en la BD
+        // 3. Actualizar el estado de un pedido en la BD (Soporta paso a 'ENTREGADO')
         public async Task<bool> ActualizarEstadoPedido(int idPedido, string nuevoEstado)
         {
             using (var conn = _conexion.ObtenerConexion())
@@ -135,9 +175,11 @@ namespace Buon_Calice.Data
             }
         }
 
-        // 4. Obtener un solo pedido por ID (para el Polling del cliente)
+        // 4. Obtener un solo pedido por ID (con sus detalles)
         public async Task<Pedido?> ObtenerPedidoPorId(int idPedido)
         {
+            Pedido? pedido = null;
+
             using (var conn = _conexion.ObtenerConexion())
             {
                 await conn.OpenAsync();
@@ -150,7 +192,7 @@ namespace Buon_Calice.Data
                     {
                         if (await reader.ReadAsync())
                         {
-                            return new Pedido
+                            pedido = new Pedido
                             {
                                 IdPedido = Convert.ToInt32(reader["id_pedido"]),
                                 Codigo = reader["codigo"].ToString()!,
@@ -158,16 +200,52 @@ namespace Buon_Calice.Data
                                 Total = Convert.ToDecimal(reader["total"]),
                                 Estado = reader["estado"].ToString()!,
                                 MetodoPago = reader["metodo_pago"] != DBNull.Value ? reader["metodo_pago"].ToString()! : "Efectivo",
-                                FechaPedido = Convert.ToDateTime(reader["fecha_pedido"])
+                                FechaPedido = Convert.ToDateTime(reader["fecha_pedido"]),
+                                Productos = new List<DetallePedido>()
                             };
                         }
                     }
                 }
             }
-            return null;
+
+            if (pedido != null)
+            {
+                using (var connDet = _conexion.ObtenerConexion())
+                {
+                    await connDet.OpenAsync();
+
+                    string queryDetalles = @"
+                        SELECT dp.id, dp.pedido_id, dp.producto_id, dp.cantidad, dp.precio_unitario, ISNULL(p.nombre, 'Producto General') AS nombre 
+                        FROM detalle_pedido dp
+                        LEFT JOIN productos p ON dp.producto_id = p.id_producto
+                        WHERE dp.pedido_id = @idPedido";
+
+                    using (var cmdDet = new SqlCommand(queryDetalles, connDet))
+                    {
+                        cmdDet.Parameters.AddWithValue("@idPedido", pedido.IdPedido);
+                        using (var readerDet = await cmdDet.ExecuteReaderAsync())
+                        {
+                            while (await readerDet.ReadAsync())
+                            {
+                                pedido.Productos.Add(new DetallePedido
+                                {
+                                    IdDetalle = Convert.ToInt32(readerDet["id"]),
+                                    PedidoId = Convert.ToInt32(readerDet["pedido_id"]),
+                                    ProductoId = Convert.ToInt32(readerDet["producto_id"]),
+                                    NombreProducto = readerDet["nombre"].ToString()!,
+                                    Cantidad = Convert.ToInt32(readerDet["cantidad"]),
+                                    PrecioUnitario = Convert.ToDecimal(readerDet["precio_unitario"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            return pedido;
         }
 
-        // 5. NUEVO: Eliminar pedido y sus detalles de SQL Server
+        // 5. Eliminar pedido físicamente (Mantenido por compatibilidad)
         public async Task<bool> EliminarPedido(int idPedido)
         {
             using (var conn = _conexion.ObtenerConexion())
@@ -177,7 +255,6 @@ namespace Buon_Calice.Data
                 {
                     try
                     {
-                        // Primero eliminamos los detalles asociados por la Foreign Key
                         string queryDetalles = "DELETE FROM detalle_pedido WHERE pedido_id = @idPedido";
                         using (var cmdDetalle = new SqlCommand(queryDetalles, conn, transaction))
                         {
@@ -185,7 +262,6 @@ namespace Buon_Calice.Data
                             await cmdDetalle.ExecuteNonQueryAsync();
                         }
 
-                        // Luego eliminamos el pedido principal
                         string queryPedido = "DELETE FROM pedidos WHERE id_pedido = @idPedido";
                         using (var cmdPedido = new SqlCommand(queryPedido, conn, transaction))
                         {
@@ -203,6 +279,40 @@ namespace Buon_Calice.Data
                     }
                 }
             }
+        }
+        // 6. Obtener métricas y reporte general de ventas entregadas
+        public async Task<object> ObtenerReporteVentas()
+        {
+            using (var conn = _conexion.ObtenerConexion())
+            {
+                await conn.OpenAsync();
+
+                string query = @"
+            SELECT 
+                COUNT(id_pedido) AS TotalPedidosEntregados,
+                ISNULL(SUM(total), 0) AS TotalIngresos,
+                ISNULL(AVG(total), 0) AS TicketPromedio
+            FROM pedidos 
+            WHERE estado = 'ENTREGADO'";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return new
+                            {
+                                TotalPedidos = Convert.ToInt32(reader["TotalPedidosEntregados"]),
+                                TotalVendido = Convert.ToDecimal(reader["TotalIngresos"]),
+                                TicketPromedio = Convert.ToDecimal(reader["TicketPromedio"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return new { TotalPedidos = 0, TotalVendido = 0, TicketPromedio = 0 };
         }
     }
 }

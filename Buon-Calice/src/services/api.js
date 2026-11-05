@@ -101,14 +101,20 @@ export const crearPedido = async (datosPedido) => {
     return data;
 };
 
-// Obtener el listado general de pedidos desde SQL Server
+// Obtener el listado general de pedidos activos desde SQL Server
 export const getPedidos = async () => {
     const res = await fetch(`${API_BASE_URL}/pedidos`);
-    if (!res.ok) throw new Error('Error al consultar pedidos');
-    return await res.json();
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+        console.error('⚠️ Error detallado desde la API backend:', data);
+        throw new Error(data.error || data.mensaje || 'Error al consultar pedidos');
+    }
+
+    return data;
 };
 
-// Eliminar un pedido en SQL Server
+// Eliminar un pedido en SQL Server (mantener por compatibilidad)
 export const eliminarPedido = async (idPedido) => {
     const res = await fetch(`${API_BASE_URL}/pedidos/${idPedido}`, {
         method: 'DELETE'
@@ -135,6 +141,20 @@ export const actualizarEstadoPedido = async (idPedido, nuevoEstado) => {
 
     if (!res.ok) {
         throw new Error(data.mensaje || 'Error al actualizar el estado del pedido');
+    }
+
+    return data;
+};
+
+// --- REPORTES Y METRICAS ---
+
+// Obtener métricas financieras y reporte de ventas entregadas
+export const getReporteVentas = async () => {
+    const res = await fetch(`${API_BASE_URL}/pedidos/reporte-ventas`);
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+        throw new Error(data.mensaje || 'Error al obtener el reporte de ventas');
     }
 
     return data;

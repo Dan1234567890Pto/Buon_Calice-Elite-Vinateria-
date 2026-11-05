@@ -14,7 +14,7 @@ namespace Buon_Calice.Data
                 ?? configuration.GetSection("ConnectionStrings:CadenaSQL").Value!;
         }
 
-        // 1. Obtener todos los productos (AHORA SÍ INCLUYE ICONO)
+        // 1. Obtener todos los productos
         public async Task<List<Producto>> ObtenerProductos(bool soloActivos = true)
         {
             var lista = new List<Producto>();
@@ -31,16 +31,7 @@ namespace Buon_Calice.Data
                     {
                         while (await reader.ReadAsync())
                         {
-                            lista.Add(new Producto
-                            {
-                                IdProducto = Convert.ToInt32(reader["idProducto"]),
-                                Nombre = reader["nombre"].ToString()!,
-                                Categoria = reader["categoria"].ToString()!,
-                                Precio = Convert.ToDecimal(reader["precio"]),
-                                Stock = Convert.ToInt32(reader["stock"]),
-                                Descripcion = reader["descripcion"] != DBNull.Value ? reader["descripcion"].ToString() : "",
-                                Icono = reader["icono"] != DBNull.Value ? reader["icono"].ToString() : null // <--- AQUÍ SE LEYERA LA FOTO
-                            });
+                            lista.Add(MapearProducto(reader));
                         }
                     }
                 }
@@ -48,7 +39,7 @@ namespace Buon_Calice.Data
             return lista;
         }
 
-        // 2. Obtener producto por ID
+        // 2. Obtener producto por ID (Corregido)
         public async Task<Producto?> ObtenerProductoPorId(int id)
         {
             Producto? producto = null;
@@ -65,16 +56,7 @@ namespace Buon_Calice.Data
                     {
                         if (await reader.ReadAsync())
                         {
-                            producto = new Producto
-                            {
-                                IdProducto = Convert.ToInt32(reader["idProducto"]),
-                                Nombre = reader["nombre"].ToString()!,
-                                Categoria = reader["categoria"].ToString()!,
-                                Precio = Convert.ToDecimal(reader["precio"]),
-                                Stock = Convert.ToInt32(reader["stock"]),
-                                Descripcion = reader["descripcion"] != DBNull.Value ? reader["descripcion"].ToString() : "",
-                                Icono = reader["icono"] != DBNull.Value ? reader["icono"].ToString() : null
-                            };
+                            producto = MapearProducto(reader);
                         }
                     }
                 }
@@ -82,7 +64,7 @@ namespace Buon_Calice.Data
             return producto;
         }
 
-        // 3. Guardar un producto nuevo (AHORA SÍ ENVÍA @icono A SQL SERVER)
+        // 3. Guardar producto nuevo
         public async Task<bool> GuardarProducto(Producto producto)
         {
             using (var conn = new SqlConnection(_conexion))
@@ -96,7 +78,7 @@ namespace Buon_Calice.Data
                     cmd.Parameters.AddWithValue("@precio", producto.Precio);
                     cmd.Parameters.AddWithValue("@stock", producto.Stock);
                     cmd.Parameters.AddWithValue("@descripcion", (object?)producto.Descripcion ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@icono", (object?)producto.Icono ?? DBNull.Value); // <--- AQUÍ SE MANDA LA FOTO
+                    cmd.Parameters.AddWithValue("@icono", (object?)producto.Icono ?? DBNull.Value);
 
                     await cmd.ExecuteNonQueryAsync();
                     return true;
@@ -127,7 +109,7 @@ namespace Buon_Calice.Data
             }
         }
 
-        // 5. Eliminar producto físicamente
+        // 5. Eliminar producto
         public async Task<bool> EliminarProducto(int id)
         {
             using (var conn = new SqlConnection(_conexion))
@@ -142,6 +124,37 @@ namespace Buon_Calice.Data
                     return true;
                 }
             }
+        }
+
+        // Función auxiliar para tolerar variaciones de nombre de columna ('id_producto' o 'idProducto')
+        private static Producto MapearProducto(SqlDataReader reader)
+        {
+            int colId = TieneColumna(reader, "id_producto") ? reader.GetOrdinal("id_producto") : reader.GetOrdinal("idProducto");
+            int colNombre = reader.GetOrdinal("nombre");
+            int colCategoria = reader.GetOrdinal("categoria");
+            int colPrecio = reader.GetOrdinal("precio");
+            int colStock = reader.GetOrdinal("stock");
+
+            return new Producto
+            {
+                IdProducto = Convert.ToInt32(reader[colId]),
+                Nombre = reader[colNombre].ToString()!,
+                Categoria = reader[colCategoria].ToString()!,
+                Precio = Convert.ToDecimal(reader[colPrecio]),
+                Stock = Convert.ToInt32(reader[colStock]),
+                Descripcion = TieneColumna(reader, "descripcion") && reader["descripcion"] != DBNull.Value ? reader["descripcion"].ToString() : "",
+                Icono = TieneColumna(reader, "icono") && reader["icono"] != DBNull.Value ? reader["icono"].ToString() : null
+            };
+        }
+
+        private static bool TieneColumna(SqlDataReader reader, string nombreColumna)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).Equals(nombreColumna, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
         }
     }
 }

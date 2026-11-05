@@ -16,6 +16,21 @@ namespace Buon_Calice.Controllers
             _pedidosData = pedidosData;
         }
 
+        // GET: api/Pedidos/reporte-ventas
+        [HttpGet("reporte-ventas")]
+        public async Task<IActionResult> GetReporteVentas()
+        {
+            try
+            {
+                var reporte = await _pedidosData.ObtenerReporteVentas();
+                return Ok(reporte);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error al obtener el reporte de ventas", error = ex.Message });
+            }
+        }
+
         // DELETE: api/Pedidos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarPedido(int id)

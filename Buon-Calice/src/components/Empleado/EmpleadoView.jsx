@@ -6,8 +6,8 @@ import {
     guardarProducto,
     eliminarProducto,
     getPedidos,
-    eliminarPedido,
-    actualizarEstadoPedido
+    actualizarEstadoPedido,
+    getReporteVentas
 } from '../../services/api';
 
 export default function EmpleadoView() {
@@ -21,6 +21,9 @@ export default function EmpleadoView() {
     const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
 
     const [pedidosEliminados, setPedidosEliminados] = useState([]);
+
+    // Estado para almacenar los indicadores KPI de ventas acumuladas
+    const [reporteVentas, setReporteVentas] = useState({ totalPedidos: 0, totalVendido: 0, ticketPromedio: 0 });
 
     const [productoEditandoId, setProductoEditandoId] = useState(null);
     const [idBusqueda, setIdBusqueda] = useState('');
@@ -43,13 +46,28 @@ export default function EmpleadoView() {
     useEffect(() => {
         obtenerProductos();
         obtenerPedidos();
+        obtenerMetricasVentas();
 
         const intervalo = setInterval(() => {
             obtenerPedidos();
+            obtenerMetricasVentas();
         }, 5000);
 
         return () => clearInterval(intervalo);
     }, [pedidosEliminados]);
+
+    const obtenerMetricasVentas = async () => {
+        try {
+            const data = await getReporteVentas();
+            setReporteVentas({
+                totalPedidos: data.totalPedidos || data.TotalPedidos || 0,
+                totalVendido: data.totalVendido || data.TotalVendido || 0,
+                ticketPromedio: data.ticketPromedio || data.TicketPromedio || 0
+            });
+        } catch (err) {
+            console.error('Error al cargar reporte de ventas:', err);
+        }
+    };
 
     const obtenerPedidos = async () => {
         try {
@@ -63,12 +81,33 @@ export default function EmpleadoView() {
 
             setPedidos(pedidosValidos);
 
-            if (pedidosValidos.length > 0 && !pedidoSeleccionado) {
-                setPedidoSeleccionado({
+            setPedidoSeleccionado(prevSel => {
+                if (!prevSel) {
+                    return pedidosValidos.length > 0 ? {
+                        ...pedidosValidos[0],
+                        idPedido: pedidosValidos[0].idPedido || pedidosValidos[0].id_pedido || pedidosValidos[0].id
+                    } : null;
+                }
+
+                const prevId = (prevSel.idPedido || prevSel.id_pedido || prevSel.id || '').toString();
+                const coincidencia = pedidosValidos.find(p => {
+                    const idActual = (p.idPedido || p.id_pedido || p.id || '').toString();
+                    return idActual === prevId || (p.codigo && p.codigo === prevSel.codigo);
+                });
+
+                if (coincidencia) {
+                    return {
+                        ...coincidencia,
+                        idPedido: coincidencia.idPedido || coincidencia.id_pedido || coincidencia.id
+                    };
+                }
+
+                return pedidosValidos.length > 0 ? {
                     ...pedidosValidos[0],
                     idPedido: pedidosValidos[0].idPedido || pedidosValidos[0].id_pedido || pedidosValidos[0].id
-                });
-            }
+                } : null;
+            });
+
         } catch (err) {
             console.error(err);
             setErrorPedidos('No se pudieron obtener los pedidos en tiempo real.');
@@ -130,7 +169,7 @@ export default function EmpleadoView() {
         });
 
         if (!pedidoEncontrado) {
-            alert('⚠️ No se encontró ningún pedido con ese código en la lista.');
+            alert('⚠️ No se encontró ningún pedido activo con ese código.');
             return;
         }
 
@@ -138,8 +177,7 @@ export default function EmpleadoView() {
         const codigoReal = (pedidoEncontrado.codigo || '').toUpperCase();
 
         try {
-            // Eliminación física en SQL Server
-            await eliminarPedido(idReal);
+            await actualizarEstadoPedido(idReal, 'ENTREGADO');
 
             setPedidosEliminados(prev => [...prev, idReal, codigoReal, entradaLimpia]);
 
@@ -155,10 +193,12 @@ export default function EmpleadoView() {
                 setPedidoSeleccionado(nuevaLista.length > 0 ? nuevaLista[0] : null);
             }
 
-            alert(`✅ Pedido ${entradaLimpia} entregado y eliminado de SQL Server.`);
+            await obtenerMetricasVentas();
+
+            alert(`✅ Pedido ${entradaLimpia} entregado con éxito y registrado en las ventas.`);
             setCodigoPedidoBorrar('');
         } catch (err) {
-            alert('⚠️ Error al eliminar pedido en la base de datos: ' + err.message);
+            alert('⚠️ Error al actualizar el pedido: ' + err.message);
         }
     };
 
@@ -232,9 +272,12 @@ export default function EmpleadoView() {
         navigate('/login');
     };
 
+    const itemsPedido = pedidoSeleccionado?.productos || pedidoSeleccionado?.detalles || pedidoSeleccionado?.items || [];
+
     return (
         <div style={{ padding: '2rem', backgroundColor: '#0D0B0A', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif', maxWidth: '850px', margin: '0 auto' }}>
 
+            {/* ENCABEZADO */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                 <div>
                     <span style={{ fontSize: '0.75rem', color: '#C5A059', letterSpacing: '0.1em', fontWeight: 'bold' }}>🟢 PANEL DE EMPLEADO</span>
@@ -246,6 +289,31 @@ export default function EmpleadoView() {
                 </button>
             </div>
 
+            {/* TARJETAS DE MÉTRICAS / FINANZAS */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ backgroundColor: '#16120E', padding: '1.2rem', borderRadius: '12px', border: '1px solid #26201B' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '0.25rem', letterSpacing: '0.05em' }}>💰 TOTAL VENDIDO</span>
+                    <strong style={{ fontSize: '1.8rem', color: '#4ade80', fontFamily: 'serif' }}>
+                        ${Number(reporteVentas.totalVendido).toFixed(2)}
+                    </strong>
+                </div>
+
+                <div style={{ backgroundColor: '#16120E', padding: '1.2rem', borderRadius: '12px', border: '1px solid #26201B' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '0.25rem', letterSpacing: '0.05em' }}>📦 PEDIDOS ENTREGADOS</span>
+                    <strong style={{ fontSize: '1.8rem', color: '#C5A059', fontFamily: 'serif' }}>
+                        {reporteVentas.totalPedidos}
+                    </strong>
+                </div>
+
+                <div style={{ backgroundColor: '#16120E', padding: '1.2rem', borderRadius: '12px', border: '1px solid #26201B' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '0.25rem', letterSpacing: '0.05em' }}>📊 TICKET PROMEDIO</span>
+                    <strong style={{ fontSize: '1.8rem', color: '#60a5fa', fontFamily: 'serif' }}>
+                        ${Number(reporteVentas.ticketPromedio).toFixed(2)}
+                    </strong>
+                </div>
+            </div>
+
+            {/* DASHBOARD DE PEDIDOS ACUMULADOS */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
                     <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em' }}>
@@ -310,6 +378,7 @@ export default function EmpleadoView() {
                 )}
             </div>
 
+            {/* VERIFICAR / ENTREGAR PEDIDO POR CÓDIGO */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em' }}>VERIFICAR / ENTREGAR PEDIDO POR CÓDIGO</span>
@@ -329,6 +398,7 @@ export default function EmpleadoView() {
                 </form>
             </div>
 
+            {/* DETALLE DEL PEDIDO SELECCIONADO */}
             {pedidoSeleccionado && (
                 <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -348,165 +418,90 @@ export default function EmpleadoView() {
                         <p style={{ margin: 0 }}><strong>Fecha:</strong> {pedidoSeleccionado.fechaPedido ? new Date(pedidoSeleccionado.fechaPedido).toLocaleString() : 'Fecha no registrada'}</p>
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0D0B0A', padding: '1rem', borderRadius: '8px', border: '1px solid #26201B', marginBottom: '1.5rem' }}>
-                        <span style={{ fontWeight: 'bold', letterSpacing: '0.05em' }}>TOTAL</span>
-                        <span style={{ color: '#C5A059', fontWeight: 'bold', fontSize: '1.2rem' }}>${pedidoSeleccionado.total}</span>
+                    {/* PRODUCTOS SOLICITADOS */}
+                    <div style={{ backgroundColor: '#0D0B0A', padding: '1rem', borderRadius: '8px', border: '1px solid #26201B', marginBottom: '1.5rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#C5A059', fontWeight: 'bold', display: 'block', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+                            🛒 PRODUCTOS SOLICITADOS ({itemsPedido.length})
+                        </span>
+                        {itemsPedido.length === 0 ? (
+                            <p style={{ color: '#aaa', margin: 0, fontSize: '0.85rem' }}>No hay detalles cargados para este pedido.</p>
+                        ) : (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                {itemsPedido.map((item, idx) => (
+                                    <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', paddingBottom: '0.4rem', borderBottom: idx < itemsPedido.length - 1 ? '1px solid #1c1815' : 'none' }}>
+                                        <span>{item.cantidad}x {item.nombreProducto || item.nombre || `Producto #${item.productoId}`}</span>
+                                        <span style={{ color: '#C5A059' }}>${(item.cantidad * item.precioUnitario).toFixed(2)}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
-                        <button onClick={() => handleCambiarEstadoPedido('EN PREPARACION')} style={{ padding: '0.75rem', backgroundColor: 'rgba(197, 160, 89, 0.15)', color: '#C5A059', border: '1px solid #C5A059', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <button onClick={() => handleCambiarEstadoPedido('EN PREPARACION')} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#26201B', color: '#F3ECE0', border: '1px solid #382E26', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
                             👨‍🍳 En Preparación
                         </button>
-                        <button onClick={() => handleCambiarEstadoPedido('LISTO')} style={{ padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid #22c55e', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                            ✅ Listo
-                        </button>
-                        <button onClick={() => handleCambiarEstadoPedido('CANCELADO')} style={{ padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: '1px solid #ef4444', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                            ⚠️ Cancelado
+                        <button onClick={() => handleCambiarEstadoPedido('LISTO')} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            ✅ Marcar Listo
                         </button>
                     </div>
                 </div>
             )}
 
-            {/* SECCIÓN DE INVENTARIO */}
+            {/* SECCIÓN DE INVENTARIO GENERAL */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
-                <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
-                    📦 INVENTARIO EN EXISTENCIA (SQL SERVER)
-                </span>
-
+                <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em', display: 'block', marginBottom: '1rem' }}>📦 INVENTARIO GENERAL ({productos.length})</span>
                 {cargandoProductos ? (
-                    <p style={{ color: '#aaa', textAlign: 'center', margin: '1rem 0' }}>Cargando inventario...</p>
-                ) : errorProductos ? (
-                    <p style={{ color: '#fda4af', textAlign: 'center', margin: '1rem 0' }}>{errorProductos}</p>
+                    <p style={{ color: '#aaa', textAlign: 'center' }}>Cargando inventario...</p>
                 ) : (
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
-                            <thead>
-                                <tr style={{ backgroundColor: '#0D0B0A', color: '#C5A059', textAlign: 'left' }}>
-                                    <th style={{ padding: '0.75rem', borderRadius: '6px 0 0 6px' }}>ID</th>
-                                    <th style={{ padding: '0.75rem' }}>Nombre</th>
-                                    <th style={{ padding: '0.75rem' }}>Categoría</th>
-                                    <th style={{ padding: '0.75rem' }}>Precio</th>
-                                    <th style={{ padding: '0.75rem' }}>Stock</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', borderRadius: '0 6px 6px 0' }}>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {productos.map((prod) => {
-                                    const id = prod.idProducto || prod.id_producto || prod.id;
-                                    return (
-                                        <tr key={id} style={{ borderBottom: '1px solid #26201B' }}>
-                                            <td style={{ padding: '0.75rem' }}>#{id}</td>
-                                            <td style={{ padding: '0.75rem', fontWeight: 'bold' }}>{prod.nombre}</td>
-                                            <td style={{ padding: '0.75rem', color: '#aaa' }}>{prod.categoria}</td>
-                                            <td style={{ padding: '0.75rem', color: '#C5A059' }}>${prod.precio}</td>
-                                            <td style={{ padding: '0.75rem' }}>{prod.stock}</td>
-                                            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                <button
-                                                    onClick={() => handleEditarProducto(prod)}
-                                                    style={{ marginRight: '0.5rem', padding: '0.3rem 0.6rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
-                                                >
-                                                    Editar
-                                                </button>
-                                                <button
-                                                    onClick={() => handleEliminarProducto(id)}
-                                                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#dc2626', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }}>
+                        {productos.map(p => (
+                            <div key={p.idProducto || p.id_producto || p.id} style={{ backgroundColor: '#0D0B0A', padding: '0.8rem', borderRadius: '8px', border: '1px solid #26201B' }}>
+                                <strong style={{ fontSize: '0.9rem', color: '#F3ECE0', display: 'block' }}>{p.nombre}</strong>
+                                <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '0.4rem' }}>{p.categoria} | Stock: {p.stock}</span>
+                                <span style={{ fontSize: '0.85rem', color: '#C5A059', fontWeight: 'bold', display: 'block', marginBottom: '0.6rem' }}>${p.precio}</span>
+                                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                    <button onClick={() => handleEditarProducto(p)} style={{ flex: 1, padding: '0.3rem', backgroundColor: '#26201B', color: '#fff', border: 'none', borderRadius: '4px', fontSize: '0.7rem', cursor: 'pointer' }}>Editar</button>
+                                    <button onClick={() => handleEliminarProducto(p.idProducto || p.id_producto || p.id)} style={{ padding: '0.3rem 0.5rem', backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', border: 'none', borderRadius: '4px', fontSize: '0.7rem', cursor: 'pointer' }}>X</button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 )}
             </div>
 
-            {/* CONSULTA POR ID */}
-            <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B', marginBottom: '2rem' }}>
-                <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
-                    🔍 CONSULTA POR ID (SQL SERVER)
-                </span>
-                <form onSubmit={handleBuscarPorId} style={{ display: 'flex', gap: '1rem' }}>
-                    <input
-                        type="number"
-                        placeholder="Ingresa ID del producto (Ej: 1)"
-                        value={idBusqueda}
-                        onChange={(e) => setIdBusqueda(e.target.value)}
-                        style={{ flex: 1, padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }}
-                    />
-                    <button type="submit" style={{ padding: '0.75rem 1.5rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                        Buscar ID
-                    </button>
-                </form>
-
-                {productoBuscado && (
-                    <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#0D0B0A', borderRadius: '8px', border: '1px solid #26201B' }}>
-                        <p style={{ margin: 0, color: '#C5A059' }}><strong>Resultado:</strong> {productoBuscado.nombre} — ${productoBuscado.precio} (Stock: {productoBuscado.stock})</p>
-                    </div>
-                )}
-            </div>
-
-            {/* FORMULARIO PRODUCTOS */}
+            {/* FORMULARIO DE REGISTRO / EDICIÓN */}
             <div style={{ backgroundColor: '#16120E', padding: '1.5rem', borderRadius: '16px', border: '1px solid #26201B' }}>
-                <span style={{ fontSize: '0.8rem', color: '#C5A059', letterSpacing: '0.05em', fontWeight: 'bold', display: 'block', marginBottom: '1rem' }}>
-                    {productoEditandoId ? `✏️ EDITAR PRODUCTO #${productoEditandoId}` : '✨ AGREGAR NUEVO PRODUCTO'}
+                <span style={{ fontSize: '0.8rem', color: '#C5A059', fontWeight: 'bold', letterSpacing: '0.05em', display: 'block', marginBottom: '1rem' }}>
+                    {productoEditandoId ? `✏️ EDITANDO PRODUCTO #${productoEditandoId}` : '➕ REGISTRAR NUEVO PRODUCTO'}
                 </span>
-
-                <form onSubmit={handleGuardarProducto} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>NOMBRE</label>
-                            <input type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} required placeholder="Ej. Jack Daniel's" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
-                        </div>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>CATEGORÍA</label>
-                            <select name="categoria" value={formData.categoria} onChange={handleInputChange} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }}>
-                                <option value="Whisky">Whisky</option>
-                                <option value="Vino">Vino</option>
-                                <option value="Tequila">Tequila</option>
-                                <option value="Ron">Ron</option>
-                                <option value="Cerveza">Cerveza</option>
-                                <option value="Mezcal">Mezcal</option>
-                                <option value="Espumoso">Espumoso</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>PRECIO</label>
-                            <input type="number" name="precio" value={formData.precio} onChange={handleInputChange} required placeholder="0.00" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
-                        </div>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>STOCK</label>
-                            <input type="number" name="stock" value={formData.stock} onChange={handleInputChange} required placeholder="0" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>URL IMAGEN O ICONO</label>
-                        <input type="text" name="imagen" value={formData.imagen} onChange={handleInputChange} placeholder="https://..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }} />
-                    </div>
-
-                    <div>
-                        <label style={{ display: 'block', fontSize: '0.75rem', color: '#aaa', marginBottom: '0.5rem' }}>DESCRIPCIÓN</label>
-                        <textarea name="descripcion" value={formData.descripcion} onChange={handleInputChange} rows="3" placeholder="Descripción breve..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #26201B', backgroundColor: '#0D0B0A', color: '#fff', outline: 'none' }}></textarea>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                        <button type="submit" style={{ flex: 1, padding: '0.85rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                            {productoEditandoId ? 'Guardar Cambios' : 'Agregar Producto'}
+                <form onSubmit={handleGuardarProducto} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleInputChange} required style={{ padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff' }} />
+                    <select name="categoria" value={formData.categoria} onChange={handleInputChange} style={{ padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff' }}>
+                        <option value="Whisky">Whisky</option>
+                        <option value="Vino">Vino</option>
+                        <option value="Tequila">Tequila</option>
+                        <option value="Vodka">Vodka</option>
+                        <option value="Cerveza">Cerveza</option>
+                        <option value="Sin Alcohol">Sin Alcohol</option>
+                    </select>
+                    <input type="number" step="0.01" name="precio" placeholder="Precio" value={formData.precio} onChange={handleInputChange} required style={{ padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff' }} />
+                    <input type="number" name="stock" placeholder="Stock" value={formData.stock} onChange={handleInputChange} required style={{ padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff' }} />
+                    <input type="text" name="imagen" placeholder="URL Imagen" value={formData.imagen} onChange={handleInputChange} style={{ gridColumn: 'span 2', padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff' }} />
+                    <textarea name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleInputChange} style={{ gridColumn: 'span 2', padding: '0.7rem', backgroundColor: '#0D0B0A', border: '1px solid #26201B', borderRadius: '6px', color: '#fff', minHeight: '60px' }} />
+                    <div style={{ gridColumn: 'span 2', display: 'flex', gap: '0.5rem' }}>
+                        <button type="submit" style={{ flex: 1, padding: '0.8rem', backgroundColor: '#C5A059', color: '#000', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            {productoEditandoId ? 'Guardar Cambios' : 'Registrar Producto'}
                         </button>
                         {productoEditandoId && (
-                            <button type="button" onClick={handleCancelarEditar} style={{ padding: '0.85rem 1.5rem', backgroundColor: 'transparent', color: '#aaa', border: '1px solid #382E26', borderRadius: '8px', cursor: 'pointer' }}>
+                            <button type="button" onClick={handleCancelarEditar} style={{ padding: '0.8rem', backgroundColor: '#26201B', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>
                                 Cancelar
                             </button>
                         )}
                     </div>
                 </form>
             </div>
+
         </div>
     );
 }

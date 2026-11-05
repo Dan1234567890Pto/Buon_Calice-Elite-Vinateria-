@@ -133,6 +133,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Buon_Calice.Controllers.PedidosController",
+    "Method": "GetReporteVentas",
+    "RelativePath": "api/Pedidos/reporte-ventas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Buon_Calice.Controllers.ProductosController",
     "Method": "Get",
     "RelativePath": "api/productos",

@@ -12,6 +12,9 @@ namespace Buon_Calice.Models
         public string Estado { get; set; } = "PENDIENTE";
         public string MetodoPago { get; set; } = string.Empty;
         public DateTime FechaPedido { get; set; } = DateTime.Now;
+
+        // Lista de productos del pedido
+        public List<DetallePedido> Productos { get; set; } = new List<DetallePedido>();
     }
 
     public class CrearPedidoDTO
@@ -28,3 +31,5 @@ namespace Buon_Calice.Models
         public decimal PrecioUnitario { get; set; }
     }
 }
+
+

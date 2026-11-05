@@ -5,6 +5,18 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Pedidos/reporte-ventas": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Pedidos/{id}": {
       "delete": {
         "tags": [
