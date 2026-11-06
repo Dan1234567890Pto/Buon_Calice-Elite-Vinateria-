@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Empleado\\EmpleadoView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Clientes\\PerfilClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Clientes\\ClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\tailwind.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tailwind.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\postcss.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:postcss.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\eslint.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:eslint.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\ProtectedRoute.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -39,8 +39,20 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Empleado\\LoginView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Empleado\\EmpleadoView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Clientes\\PerfilClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Clientes\\ClienteView.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
@@ -80,20 +92,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PerfilClienteView.jsx",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx",
-              "RelativeDocumentMoniker": "src\\components\\Clientes\\PerfilClienteView.jsx",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx",
-              "RelativeToolTip": "src\\components\\Clientes\\PerfilClienteView.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2026-10-30T00:04:00.871Z",
+              "DocumentIndex": 3,
+              "Title": "eslint.config.js",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\eslint.config.js",
+              "RelativeDocumentMoniker": "eslint.config.js",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\eslint.config.js",
+              "RelativeToolTip": "eslint.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-11-06T01:40:39.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "vite.config.js",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\vite.config.js",
+              "RelativeDocumentMoniker": "vite.config.js",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\vite.config.js",
+              "RelativeToolTip": "vite.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-10-30T03:08:38.873Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "tailwind.config.js",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\tailwind.config.js",
+              "RelativeDocumentMoniker": "tailwind.config.js",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\tailwind.config.js",
+              "RelativeToolTip": "tailwind.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-11-06T01:41:11.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "api.js",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js",
+              "RelativeDocumentMoniker": "src\\services\\api.js",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js",
+              "RelativeToolTip": "src\\services\\api.js",
+              "ViewState": "AgIAAKAAAAAAAAAAAAAAAKAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-10-30T03:05:14.831Z"
             },
             {
               "$type": "Document",
@@ -103,97 +151,9 @@
               "RelativeDocumentMoniker": "src\\App.jsx",
               "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\App.jsx",
               "RelativeToolTip": "src\\App.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2026-10-27T23:27:49.251Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "api.js",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js",
-              "RelativeDocumentMoniker": "src\\services\\api.js",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\services\\api.js",
-              "RelativeToolTip": "src\\services\\api.js",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAUwKAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-10-30T03:05:14.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EmpleadoView.jsx",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
-              "RelativeDocumentMoniker": "src\\components\\Empleado\\EmpleadoView.jsx",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
-              "RelativeToolTip": "src\\components\\Empleado\\EmpleadoView.jsx",
-              "ViewState": "AgIAAPoBAAAAAAAAAAAAAPoBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2026-10-27T23:32:47.092Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "vite.config.js",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\vite.config.js",
-              "RelativeDocumentMoniker": "vite.config.js",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\vite.config.js",
-              "RelativeToolTip": "vite.config.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-10-30T03:08:38.873Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ClienteView.jsx",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
-              "RelativeDocumentMoniker": "src\\components\\Clientes\\ClienteView.jsx",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
-              "RelativeToolTip": "src\\components\\Clientes\\ClienteView.jsx",
-              "ViewState": "AgIAACQCAAAAAAAAAAAmwFsCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2026-10-30T00:07:30.052Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json",
-              "RelativeDocumentMoniker": "package.json",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json",
-              "RelativeToolTip": "package.json",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAIwBwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-10-25T15:14:08.364Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "main.jsx",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx",
-              "RelativeDocumentMoniker": "src\\main.jsx",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx",
-              "RelativeToolTip": "src\\main.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2026-10-30T01:51:13.694Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "LoginView.jsx",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\LoginView.jsx",
-              "RelativeDocumentMoniker": "src\\components\\Empleado\\LoginView.jsx",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\LoginView.jsx",
-              "RelativeToolTip": "src\\components\\Empleado\\LoginView.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2026-10-27T23:32:23.997Z"
             },
             {
               "$type": "Document",
@@ -209,7 +169,91 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "postcss.config.js",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\postcss.config.js",
+              "RelativeDocumentMoniker": "postcss.config.js",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\postcss.config.js",
+              "RelativeToolTip": "postcss.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-11-06T01:33:41.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginView.jsx",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\LoginView.jsx",
+              "RelativeDocumentMoniker": "src\\components\\Empleado\\LoginView.jsx",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\LoginView.jsx",
+              "RelativeToolTip": "src\\components\\Empleado\\LoginView.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-10-27T23:32:23.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "main.jsx",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx",
+              "RelativeDocumentMoniker": "src\\main.jsx",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\main.jsx",
+              "RelativeToolTip": "src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-10-30T01:51:13.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EmpleadoView.jsx",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
+              "RelativeDocumentMoniker": "src\\components\\Empleado\\EmpleadoView.jsx",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
+              "RelativeToolTip": "src\\components\\Empleado\\EmpleadoView.jsx",
+              "ViewState": "AgIAALgBAAAAAAAAAAAAwPoBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-10-27T23:32:47.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PerfilClienteView.jsx",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx",
+              "RelativeDocumentMoniker": "src\\components\\Clientes\\PerfilClienteView.jsx",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\PerfilClienteView.jsx",
+              "RelativeToolTip": "src\\components\\Clientes\\PerfilClienteView.jsx",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAAAOIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-10-30T00:04:00.871Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 11,
+              "Title": "ClienteView.jsx",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
+              "RelativeDocumentMoniker": "src\\components\\Clientes\\ClienteView.jsx",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
+              "RelativeToolTip": "src\\components\\Clientes\\ClienteView.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-10-30T00:07:30.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json",
+              "RelativeDocumentMoniker": "package.json",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-Calice\\package.json",
+              "RelativeToolTip": "package.json",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAIwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-25T15:14:08.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "api.js",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\services\\api.js",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\services\\api.js",
@@ -220,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\index.css",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\index.css",
@@ -231,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "EmpleadoView.jsx",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\components\\Empleado\\EmpleadoView.jsx",
@@ -243,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "App.css",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\App.css",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\App.css",
@@ -255,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "ClienteView.jsx",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\components\\Clientes\\ClienteView.jsx",
@@ -267,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "main.jsx",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\main.jsx",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\main.jsx",
@@ -279,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "tailwind.config.js",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\tailwind.config.js",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\tailwind.config.js",
@@ -291,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "postcss.config.js",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\postcss.config.js",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\postcss.config.js",
@@ -303,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\src\\App.jsx",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\src\\App.jsx",
@@ -315,7 +359,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "vite.config.js",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\\Buon-Calice\\vite.config.js",
               "RelativeDocumentMoniker": "..\\..\\Buon-Calice\\Buon-Calice\\vite.config.js",
