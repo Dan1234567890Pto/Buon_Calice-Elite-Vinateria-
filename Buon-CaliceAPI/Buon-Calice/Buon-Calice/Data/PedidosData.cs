@@ -66,33 +66,32 @@ namespace Buon_Calice.Data
                             }
                         }
 
-                        transaction.Commit();
+                        await transaction.CommitAsync();
                         return true;
                     }
                     catch
                     {
-                        transaction.Rollback();
+                        await transaction.RollbackAsync();
                         throw;
                     }
                 }
             }
         }
 
-        // 2. Obtener lista de pedidos ACTIVOS (Excluye ENTREGADO y CANCELADO para el panel de trabajo)
+        // 2. Obtener lista de pedidos (Si viene usuario_id trae todo su historial incluyendo ENTREGADO, si es nulo filtra solo activos para el empleado)
         public async Task<List<Pedido>> ObtenerPedidos(int? usuarioId = null)
         {
             var lista = new List<Pedido>();
 
-            // Paso A: Leer solo las cabeceras de pedidos activos
             using (var conn = _conexion.ObtenerConexion())
             {
                 await conn.OpenAsync();
 
                 string query = @"SELECT id_pedido, codigo, usuario_id, total, estado, metodo_pago, fecha_pedido 
-                                FROM pedidos 
-                                WHERE (@usuario_id IS NULL OR usuario_id = @usuario_id)
-                                  AND estado NOT IN ('ENTREGADO', 'CANCELADO')
-                                ORDER BY fecha_pedido DESC";
+                        FROM pedidos 
+                        WHERE (@usuario_id IS NULL AND estado NOT IN ('ENTREGADO', 'CANCELADO'))
+                           OR (@usuario_id IS NOT NULL AND usuario_id = @usuario_id)
+                        ORDER BY fecha_pedido DESC";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
@@ -118,7 +117,6 @@ namespace Buon_Calice.Data
                 }
             }
 
-            // Paso B: Cargar los productos usando dp.id (columna real de tu tabla SQL)
             foreach (var pedido in lista)
             {
                 using (var connDet = _conexion.ObtenerConexion())
@@ -126,10 +124,10 @@ namespace Buon_Calice.Data
                     await connDet.OpenAsync();
 
                     string queryDetalles = @"
-                        SELECT dp.id, dp.pedido_id, dp.producto_id, dp.cantidad, dp.precio_unitario, ISNULL(p.nombre, 'Producto General') AS nombre 
-                        FROM detalle_pedido dp
-                        LEFT JOIN productos p ON dp.producto_id = p.id_producto
-                        WHERE dp.pedido_id = @idPedido";
+                SELECT dp.id, dp.pedido_id, dp.producto_id, dp.cantidad, dp.precio_unitario, ISNULL(p.nombre, 'Producto General') AS nombre 
+                FROM detalle_pedido dp
+                LEFT JOIN productos p ON dp.producto_id = p.id_producto
+                WHERE dp.pedido_id = @idPedido";
 
                     using (var cmdDet = new SqlCommand(queryDetalles, connDet))
                     {
@@ -155,22 +153,55 @@ namespace Buon_Calice.Data
 
             return lista;
         }
-
-        // 3. Actualizar el estado de un pedido en la BD (Soporta paso a 'ENTREGADO')
+        // 3. Actualizar el estado de un pedido en la BD y descontar el stock al entregar
         public async Task<bool> ActualizarEstadoPedido(int idPedido, string nuevoEstado)
         {
             using (var conn = _conexion.ObtenerConexion())
             {
                 await conn.OpenAsync();
-                string query = "UPDATE pedidos SET estado = @nuevoEstado WHERE id_pedido = @idPedido";
-
-                using (var cmd = new SqlCommand(query, conn))
+                using (var transaction = conn.BeginTransaction())
                 {
-                    cmd.Parameters.AddWithValue("@idPedido", idPedido);
-                    cmd.Parameters.AddWithValue("@nuevoEstado", nuevoEstado);
+                    try
+                    {
+                        // Paso A: Cambiar el estado en la tabla 'pedidos' usando 'id_pedido'
+                        string queryEstado = "UPDATE pedidos SET estado = @Estado WHERE id_pedido = @IdPedido";
 
-                    int filas = await cmd.ExecuteNonQueryAsync();
-                    return filas > 0;
+                        using (var cmdEstado = new SqlCommand(queryEstado, conn, transaction))
+                        {
+                            cmdEstado.Parameters.AddWithValue("@Estado", nuevoEstado);
+                            cmdEstado.Parameters.AddWithValue("@IdPedido", idPedido);
+                            await cmdEstado.ExecuteNonQueryAsync();
+                        }
+
+                        // Paso B: Descontar stock al marcar como ENTREGADO
+                        if (nuevoEstado.Trim().ToUpper() == "ENTREGADO")
+                        {
+                            // Corregido: Usamos dp.pedido_id y p.id_producto exactos de tus tablas SQL
+                            string queryStock = @"
+                                UPDATE p
+                                SET p.stock = CASE 
+                                    WHEN (p.stock - dp.cantidad) < 0 THEN 0 
+                                    ELSE (p.stock - dp.cantidad) 
+                                END
+                                FROM productos p
+                                INNER JOIN detalle_pedido dp ON p.id_producto = dp.producto_id
+                                WHERE dp.pedido_id = @IdPedido";
+
+                            using (var cmdStock = new SqlCommand(queryStock, conn, transaction))
+                            {
+                                cmdStock.Parameters.AddWithValue("@IdPedido", idPedido);
+                                await cmdStock.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        await transaction.CommitAsync();
+                        return true;
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
                 }
             }
         }
@@ -245,7 +276,7 @@ namespace Buon_Calice.Data
             return pedido;
         }
 
-        // 5. Eliminar pedido físicamente (Mantenido por compatibilidad)
+        // 5. Eliminar pedido físicamente
         public async Task<bool> EliminarPedido(int idPedido)
         {
             using (var conn = _conexion.ObtenerConexion())
@@ -268,18 +299,19 @@ namespace Buon_Calice.Data
                             cmdPedido.Parameters.AddWithValue("@idPedido", idPedido);
                             int filasAfectadas = await cmdPedido.ExecuteNonQueryAsync();
 
-                            transaction.Commit();
+                            await transaction.CommitAsync();
                             return filasAfectadas > 0;
                         }
                     }
                     catch
                     {
-                        transaction.Rollback();
+                        await transaction.RollbackAsync();
                         throw;
                     }
                 }
             }
         }
+
         // 6. Obtener métricas y reporte general de ventas entregadas
         public async Task<object> ObtenerReporteVentas()
         {
@@ -288,12 +320,12 @@ namespace Buon_Calice.Data
                 await conn.OpenAsync();
 
                 string query = @"
-            SELECT 
-                COUNT(id_pedido) AS TotalPedidosEntregados,
-                ISNULL(SUM(total), 0) AS TotalIngresos,
-                ISNULL(AVG(total), 0) AS TicketPromedio
-            FROM pedidos 
-            WHERE estado = 'ENTREGADO'";
+                    SELECT 
+                        COUNT(id_pedido) AS TotalPedidosEntregados,
+                        ISNULL(SUM(total), 0) AS TotalIngresos,
+                        ISNULL(AVG(total), 0) AS TicketPromedio
+                    FROM pedidos 
+                    WHERE estado = 'ENTREGADO'";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {

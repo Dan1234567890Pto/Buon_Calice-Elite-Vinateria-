@@ -486,6 +486,10 @@
             "format": "int32",
             "nullable": true
           },
+          "telefonoCliente": {
+            "type": "string",
+            "nullable": true
+          },
           "metodoPago": {
             "type": "string",
             "nullable": true

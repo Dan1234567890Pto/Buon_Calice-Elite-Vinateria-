@@ -20,6 +20,7 @@ namespace Buon_Calice.Models
     public class CrearPedidoDTO
     {
         public int? UsuarioId { get; set; }
+        public string TelefonoCliente { get; set; } = string.Empty; // <-- AGREGADO AQUÍ
         public string MetodoPago { get; set; } = string.Empty;
         public List<DetallePedidoDTO> Productos { get; set; } = new List<DetallePedidoDTO>();
     }
@@ -31,5 +32,3 @@ namespace Buon_Calice.Models
         public decimal PrecioUnitario { get; set; }
     }
 }
-
-

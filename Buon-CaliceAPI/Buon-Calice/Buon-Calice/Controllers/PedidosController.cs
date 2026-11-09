@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Buon_Calice.Data;
 using Buon_Calice.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Buon_Calice.Controllers
 {
@@ -10,10 +14,12 @@ namespace Buon_Calice.Controllers
     public class PedidosController : ControllerBase
     {
         private readonly PedidosData _pedidosData;
+        private readonly IConfiguration _configuration;
 
-        public PedidosController(PedidosData pedidosData)
+        public PedidosController(PedidosData pedidosData, IConfiguration configuration)
         {
             _pedidosData = pedidosData;
+            _configuration = configuration;
         }
 
         // GET: api/Pedidos/reporte-ventas
@@ -62,6 +68,40 @@ namespace Buon_Calice.Controllers
                     return BadRequest(new { mensaje = "El carrito está vacío o los datos enviados no son válidos." });
                 }
 
+                string connectionString = _configuration.GetConnectionString("CadenaSQL");
+
+                // --- 1. VALIDACIÓN DE TELÉFONO EN LA TABLA USUARIOS ---
+                if (dto.UsuarioId.HasValue && dto.UsuarioId > 0 && !string.IsNullOrWhiteSpace(dto.TelefonoCliente))
+                {
+                    if (!string.IsNullOrEmpty(connectionString))
+                    {
+                        using (var conn = new SqlConnection(connectionString))
+                        {
+                            await conn.OpenAsync();
+                            // Consulta exacta basada en tu tabla usuarios (id_usuario, telefono)
+                            string queryValidarTel = "SELECT TOP 1 telefono FROM usuarios WHERE id_usuario = @UsuarioId";
+
+                            using (var cmd = new SqlCommand(queryValidarTel, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@UsuarioId", dto.UsuarioId.Value);
+                                var resultadoObj = await cmd.ExecuteScalarAsync();
+
+                                string telefonoBD = (resultadoObj != null && resultadoObj != DBNull.Value)
+                                    ? resultadoObj.ToString()?.Trim()
+                                    : string.Empty;
+
+                                // Si existe el teléfono en la BD y no coincide con el ingresado en el checkout
+                                if (!string.IsNullOrEmpty(telefonoBD) &&
+                                    string.Compare(telefonoBD, dto.TelefonoCliente.Trim(), StringComparison.OrdinalIgnoreCase) != 0)
+                                {
+                                    return BadRequest(new { mensaje = "Este no me pertenece" });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // --- 2. CREACIÓN DEL PEDIDO VÍA PEDIDOSDATA / SP ---
                 var exito = await _pedidosData.CrearPedido(dto);
 
                 if (exito)
@@ -72,14 +112,14 @@ namespace Buon_Calice.Controllers
                     return Ok(new
                     {
                         mensaje = "Pedido registrado con éxito",
-                        idPedido = ultimoPedidoCreado?.IdPedido,
-                        codigo = ultimoPedidoCreado?.Codigo,
-                        total = ultimoPedidoCreado?.Total,
-                        estado = ultimoPedidoCreado?.Estado
+                        idPedido = ultimoPedidoCreado?.IdPedido ?? 0,
+                        codigo = ultimoPedidoCreado?.Codigo ?? "BC-PENDIENTE",
+                        total = ultimoPedidoCreado?.Total ?? 0,
+                        estado = ultimoPedidoCreado?.Estado ?? "PENDIENTE"
                     });
                 }
 
-                return BadRequest(new { mensaje = "Error al procesar el pedido" });
+                return BadRequest(new { mensaje = "Error al procesar el pedido en la base de datos." });
             }
             catch (Exception ex)
             {
@@ -91,7 +131,6 @@ namespace Buon_Calice.Controllers
                 });
             }
         }
-
         // GET: api/Pedidos
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] int? usuarioId = null)
