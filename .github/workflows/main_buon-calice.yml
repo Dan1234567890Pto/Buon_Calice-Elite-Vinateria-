@@ -52,4 +52,4 @@ jobs:
           app-name: 'Buon-Calice'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_97C3E9E00E994E5FB7063C7AE84E70A4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3DFC982922ED4C51A467CE7F41E0D8DB }}
