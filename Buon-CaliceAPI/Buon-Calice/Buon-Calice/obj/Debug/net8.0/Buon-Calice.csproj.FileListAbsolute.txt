@@ -144,7 +144,6 @@ C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\Buon-Cal.331F429D.Up2Date
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\Buon-Calice.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\refint\Buon-Calice.dll
@@ -152,3 +151,4 @@ C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\Buon-Calice.genruntimeconfig.cache
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Debug\net8.0\ref\Buon-Calice.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Debug\net8.0\BCrypt-Net-Next.dll
+C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Debug\net8.0\dotnet-tools.json
