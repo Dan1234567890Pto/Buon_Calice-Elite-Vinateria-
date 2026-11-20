@@ -21,6 +21,7 @@ builder.Services.AddScoped<ProductosData>();
 builder.Services.AddScoped<UsuariosData>();
 builder.Services.AddScoped<PedidosData>();
 builder.Services.AddScoped<EmailService>();
+
 var app = builder.Build();
 
 // Swagger habilitado también en Azure (Producción) para poder probar tus endpoints

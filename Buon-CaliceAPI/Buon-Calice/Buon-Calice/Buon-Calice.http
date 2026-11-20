@@ -1,0 +1,6 @@
+@Buon_Calice_HostAddress = http://localhost:5254
+
+GET {{Buon_Calice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
