@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Buon-Calice" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice\ \(Elite\ Vinateria\)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\obj\\Release\\net8\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
