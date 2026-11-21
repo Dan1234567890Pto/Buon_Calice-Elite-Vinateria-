@@ -90,7 +90,12 @@
               "RelativeToolTip": "Buon-Calice\\Data\\EmailService.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2026-11-20T17:10:30.77Z"
+=======
+              "WhenOpened": "2026-11-20T17:10:30.77Z",
+              "EditorCaption": ""
+>>>>>>> 6026209b6133815b2cb2e0a62e052b8606804e08
             },
             {
               "$type": "Document",
@@ -102,7 +107,12 @@
               "RelativeToolTip": "Buon-Calice\\Controllers\\ProductosController.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAYwEYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2026-10-25T02:31:21.299Z"
+=======
+              "WhenOpened": "2026-10-25T02:31:21.299Z",
+              "EditorCaption": ""
+>>>>>>> 6026209b6133815b2cb2e0a62e052b8606804e08
             },
             {
               "$type": "Document",
@@ -114,7 +124,8 @@
               "RelativeToolTip": "Buon-Calice\\Controllers\\UsuariosController.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAgwEsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-25T02:53:43.884Z"
+              "WhenOpened": "2026-10-25T02:53:43.884Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -283,7 +294,8 @@
               "RelativeToolTip": "Buon-Calice\\Buon-Calice.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-10-25T02:27:33.841Z"
+              "WhenOpened": "2026-10-25T02:27:33.841Z",
+              "EditorCaption": ""
             }
           ]
         }
