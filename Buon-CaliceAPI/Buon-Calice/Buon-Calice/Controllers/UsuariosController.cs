@@ -77,11 +77,15 @@ namespace Buon_Calice.Controllers
                     return BadRequest(new { mensaje = "No se pudo registrar el usuario." });
                 }
 
+<<<<<<< HEAD
                 var envio = await _emailService.EnviarCodigoVerificacion(dto.Correo, dto.Nombre ?? "Cliente", codigo);
                 if (!envio.Exito)
                 {
                     return BadRequest(new { mensaje = envio.Error });
                 }
+=======
+                await _emailService.EnviarCodigoVerificacion(dto.Correo, dto.Nombre ?? "Cliente", codigo);
+>>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
 
                 return Ok(new
                 {
@@ -150,11 +154,15 @@ namespace Buon_Calice.Controllers
                     return BadRequest(new { mensaje = "El correo no existe o ya se encuentra verificado." });
                 }
 
+<<<<<<< HEAD
                 var envio = await _emailService.EnviarCodigoVerificacion(dto.Correo, resultado.Value.Nombre, resultado.Value.Codigo);
                 if (!envio.Exito)
                 {
                     return BadRequest(new { mensaje = envio.Error });
                 }
+=======
+                await _emailService.EnviarCodigoVerificacion(dto.Correo, resultado.Value.Nombre, resultado.Value.Codigo);
+>>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
 
                 return Ok(new { mensaje = "Se ha enviado un nuevo código a tu correo." });
             }

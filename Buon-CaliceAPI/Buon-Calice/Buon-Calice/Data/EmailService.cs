@@ -14,7 +14,13 @@ namespace Buon_Calice.Data
             _config = config;
         }
 
+<<<<<<< HEAD
         public async Task<(bool Exito, string Error)> EnviarCodigoVerificacion(string correoDestino, string nombreCliente, string codigo)
+=======
+
+
+        public async Task<bool> EnviarCodigoVerificacion(string correoDestino, string nombreCliente, string codigo)
+>>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
         {
             string apiKey = (_config["Brevo:ApiKey"] ?? "").Trim();
             string remitenteCorreo = (_config["Brevo:SenderEmail"] ?? "").Trim();
