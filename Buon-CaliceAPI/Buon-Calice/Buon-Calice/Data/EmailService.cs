@@ -14,11 +14,16 @@ namespace Buon_Calice.Data
             _config = config;
         }
 
-        public async Task<bool> EnviarCodigoVerificacion(string correoDestino, string nombreCliente, string codigo)
+        public async Task<(bool Exito, string Error)> EnviarCodigoVerificacion(string correoDestino, string nombreCliente, string codigo)
         {
-            string apiKey = _config["Brevo:ApiKey"] ?? "TU_API_KEY_DE_BREVO";
-            string remitenteCorreo = _config["Brevo:SenderEmail"] ?? "tu_correo_remitente@gmail.com";
+            string apiKey = (_config["Brevo:ApiKey"] ?? "").Trim();
+            string remitenteCorreo = (_config["Brevo:SenderEmail"] ?? "").Trim();
             string remitenteNombre = "Buon Calice - Élite Vinatería";
+
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(remitenteCorreo))
+            {
+                return (false, "Faltan las variables Brevo:ApiKey o Brevo:SenderEmail en Azure.");
+            }
 
             string htmlContenido = $@"
             <div style='background-color:#0D0B0A; color:#F3ECE0; font-family:Georgia, serif; padding:32px; max-width:520px; margin:0 auto; border:1px solid #26201B; border-radius:16px;'>
@@ -52,7 +57,13 @@ namespace Buon_Calice.Data
             request.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.SendAsync(request);
-            return response.IsSuccessStatusCode;
+            if (response.IsSuccessStatusCode)
+            {
+                return (true, string.Empty);
+            }
+
+            string detalleError = await response.Content.ReadAsStringAsync();
+            return (false, $"Error Brevo ({(int)response.StatusCode}): {detalleError}");
         }
     }
 }
