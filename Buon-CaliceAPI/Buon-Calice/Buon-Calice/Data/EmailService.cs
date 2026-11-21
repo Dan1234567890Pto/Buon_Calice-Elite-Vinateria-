@@ -14,6 +14,8 @@ namespace Buon_Calice.Data
             _config = config;
         }
 
+
+
         public async Task<bool> EnviarCodigoVerificacion(string correoDestino, string nombreCliente, string codigo)
         {
             string apiKey = _config["Brevo:ApiKey"] ?? "TU_API_KEY_DE_BREVO";
