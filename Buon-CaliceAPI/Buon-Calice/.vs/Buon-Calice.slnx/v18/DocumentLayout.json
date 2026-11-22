@@ -7,26 +7,10 @@
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< HEAD
-=======
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,8 +23,6 @@
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-=======
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -106,56 +88,22 @@
               "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\UsuariosController.cs",
               "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\UsuariosController.cs",
               "RelativeToolTip": "Buon-Calice\\Controllers\\UsuariosController.cs",
-<<<<<<< HEAD
-              "ViewState": "AgIAAIkAAAAAAAAAAAA8wLEAAAABAAAAAAAAAA==",
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.619Z",
+              "WhenOpened": "2026-11-22T03:17:06.053Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
               "DocumentIndex": 1,
-=======
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Program.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeToolTip": "Buon-Calice\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.622Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsuariosData.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Data\\UsuariosData.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
-              "RelativeToolTip": "Buon-Calice\\Data\\UsuariosData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\EmailService.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\EmailService.cs",
               "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\EmailService.cs",
               "RelativeToolTip": "Buon-Calice\\Data\\EmailService.cs",
-<<<<<<< HEAD
               "ViewState": "AgIAABwAAAAAAAAAAAAqwEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.584Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T03:17:06.1Z"
             },
             {
               "$type": "Document",
@@ -167,17 +115,11 @@
               "RelativeToolTip": "Buon-Calice\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.622Z"
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.584Z"
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "WhenOpened": "2026-11-22T03:17:06.104Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-<<<<<<< HEAD
               "Title": "UsuariosData.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\UsuariosData.cs",
@@ -185,13 +127,11 @@
               "RelativeToolTip": "Buon-Calice\\Data\\UsuariosData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
+              "WhenOpened": "2026-11-22T03:17:06.107Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-=======
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\Usuario.cs",
@@ -199,7 +139,7 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Usuario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.649Z"
+              "WhenOpened": "2026-11-22T03:17:06.109Z"
             },
             {
               "$type": "Document",
@@ -211,7 +151,7 @@
               "RelativeToolTip": "Buon-Calice\\Controllers\\ProductosController.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAYwEYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.616Z"
+              "WhenOpened": "2026-11-22T03:17:06.111Z"
             },
             {
               "$type": "Document",
@@ -223,7 +163,7 @@
               "RelativeToolTip": "Buon-Calice\\Buon-Calice.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
+              "WhenOpened": "2026-11-22T03:17:06.114Z"
             },
             {
               "$type": "Document",
@@ -235,7 +175,7 @@
               "RelativeToolTip": "Buon-Calice\\Data\\ProductoData.cs",
               "ViewState": "AgIAAHIAAAAAAAAAAAAYwIEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
+              "WhenOpened": "2026-11-22T03:17:06.116Z"
             },
             {
               "$type": "Document",
@@ -247,7 +187,7 @@
               "RelativeToolTip": "Buon-Calice\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
+              "WhenOpened": "2026-11-22T03:17:06.118Z"
             },
             {
               "$type": "Document",
@@ -259,8 +199,7 @@
               "RelativeToolTip": "Buon-Calice\\Controllers\\PedidosController.cs",
               "ViewState": "AgIAAHAAAAAAAAAAAAAcwIQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T03:17:06.12Z"
             },
             {
               "$type": "Document",
@@ -272,7 +211,7 @@
               "RelativeToolTip": "Buon-Calice\\Data\\PedidosData.cs",
               "ViewState": "AgIAAG4AAAAAAAAAAAAcwJoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
+              "WhenOpened": "2026-11-22T03:17:06.121Z"
             },
             {
               "$type": "Document",
@@ -284,7 +223,7 @@
               "RelativeToolTip": "Buon-Calice\\Models\\DetallePedido.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.647Z"
+              "WhenOpened": "2026-11-22T03:17:06.124Z"
             },
             {
               "$type": "Document",
@@ -296,7 +235,7 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Pedido.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.649Z"
+              "WhenOpened": "2026-11-22T03:17:06.126Z"
             },
             {
               "$type": "Document",
@@ -308,7 +247,7 @@
               "RelativeToolTip": "Buon-Calice\\Models\\LoginRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.654Z"
+              "WhenOpened": "2026-11-22T03:17:06.128Z"
             },
             {
               "$type": "Document",
@@ -320,7 +259,7 @@
               "RelativeToolTip": "Buon-Calice\\Data\\Conexion.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.657Z"
+              "WhenOpened": "2026-11-22T03:17:06.13Z"
             },
             {
               "$type": "Document",
@@ -332,7 +271,7 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Producto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.659Z"
+              "WhenOpened": "2026-11-22T03:17:06.133Z"
             },
             {
               "$type": "Document",
@@ -344,7 +283,7 @@
               "RelativeToolTip": "Buon-Calice\\Buon-Calice.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-11-21T04:39:41.663Z"
+              "WhenOpened": "2026-11-22T03:17:06.137Z"
             }
           ]
         }
