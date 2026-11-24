@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Buon-Calice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91c3435d991800bab4bbbeca97557c33f90a3f01")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9eab399e8dd06f2311d491df1ac0e75bcd17fc61")]
 [assembly: System.Reflection.AssemblyProductAttribute("Buon-Calice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Buon-Calice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

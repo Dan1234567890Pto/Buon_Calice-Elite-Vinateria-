@@ -3,30 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< HEAD
-=======
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< HEAD
+      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\pedidosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\pedidosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\usuariosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,8 +39,6 @@
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-=======
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,20 +51,8 @@
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\buon-calice.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\data\\pedidosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|solutionrelative:buon-calice\\data\\pedidosdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{762B67EB-BEF7-88D5-9C4B-A05293D73C95}|Buon-Calice\\Buon-Calice.csproj|c:\\users\\mero0\\onedrive\\escritorio\\buon-calice (elite vinateria)\\buon-caliceapi\\buon-calice\\buon-calice\\models\\detallepedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,38 +87,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UsuariosController.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\UsuariosController.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\UsuariosController.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\UsuariosController.cs",
-              "RelativeToolTip": "Buon-Calice\\Controllers\\UsuariosController.cs",
-<<<<<<< HEAD
-              "ViewState": "AgIAAIkAAAAAAAAAAAA8wLEAAAABAAAAAAAAAA==",
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "Title": "PagosController.cs",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PagosController.cs",
+              "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\PagosController.cs",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PagosController.cs",
+              "RelativeToolTip": "Buon-Calice\\Controllers\\PagosController.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAkwEkAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.619Z",
+              "WhenOpened": "2026-11-24T00:48:29.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 1,
-=======
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Program.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeToolTip": "Buon-Calice\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
+              "Title": "PedidosController.cs",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PedidosController.cs",
+              "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\PedidosController.cs",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PedidosController.cs",
+              "RelativeToolTip": "Buon-Calice\\Controllers\\PedidosController.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAiwLcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.622Z"
+              "WhenOpened": "2026-11-22T03:17:06.12Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "UsuariosData.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\UsuariosData.cs",
@@ -140,58 +120,36 @@
               "RelativeToolTip": "Buon-Calice\\Data\\UsuariosData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
+              "WhenOpened": "2026-11-22T03:17:06.107Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "DocumentIndex": 1,
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\EmailService.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\EmailService.cs",
               "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\EmailService.cs",
               "RelativeToolTip": "Buon-Calice\\Data\\EmailService.cs",
-<<<<<<< HEAD
-              "ViewState": "AgIAABwAAAAAAAAAAAAqwEQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAkwEQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.584Z",
+              "WhenOpened": "2026-11-22T03:17:06.1Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Program.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
-              "RelativeToolTip": "Buon-Calice\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
+              "Title": "PedidosData.cs",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\PedidosData.cs",
+              "RelativeDocumentMoniker": "Buon-Calice\\Data\\PedidosData.cs",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\PedidosData.cs",
+              "RelativeToolTip": "Buon-Calice\\Data\\PedidosData.cs",
+              "ViewState": "AgIAAC8BAAAAAAAAAAAcwEsBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.622Z"
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.584Z"
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "WhenOpened": "2026-11-22T03:17:06.121Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-<<<<<<< HEAD
-              "Title": "UsuariosData.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Data\\UsuariosData.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\UsuariosData.cs",
-              "RelativeToolTip": "Buon-Calice\\Data\\UsuariosData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-=======
->>>>>>> 07deeca9afcf7bae7a13da0caf268e471f8193ef
+              "DocumentIndex": 7,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\Usuario.cs",
@@ -199,11 +157,48 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Usuario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.649Z"
+              "WhenOpened": "2026-11-22T03:17:06.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\appsettings.json",
+              "RelativeDocumentMoniker": "Buon-Calice\\appsettings.json",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\appsettings.json",
+              "RelativeToolTip": "Buon-Calice\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAB9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-11-22T03:17:06.118Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Buon-Calice\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T03:17:06.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
+              "RelativeDocumentMoniker": "Buon-Calice\\Program.cs",
+              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Program.cs",
+              "RelativeToolTip": "Buon-Calice\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T03:17:06.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ProductosController.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\ProductosController.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\ProductosController.cs",
@@ -211,11 +206,11 @@
               "RelativeToolTip": "Buon-Calice\\Controllers\\ProductosController.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAYwEYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.616Z"
+              "WhenOpened": "2026-11-22T03:17:06.111Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Buon-Calice.http",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.http",
               "RelativeDocumentMoniker": "Buon-Calice\\Buon-Calice.http",
@@ -223,11 +218,11 @@
               "RelativeToolTip": "Buon-Calice\\Buon-Calice.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
+              "WhenOpened": "2026-11-22T03:17:06.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "ProductoData.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\ProductoData.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\ProductoData.cs",
@@ -235,48 +230,11 @@
               "RelativeToolTip": "Buon-Calice\\Data\\ProductoData.cs",
               "ViewState": "AgIAAHIAAAAAAAAAAAAYwIEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
+              "WhenOpened": "2026-11-22T03:17:06.116Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\appsettings.json",
-              "RelativeDocumentMoniker": "Buon-Calice\\appsettings.json",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\appsettings.json",
-              "RelativeToolTip": "Buon-Calice\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-11-21T04:39:41.632Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PedidosController.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PedidosController.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Controllers\\PedidosController.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Controllers\\PedidosController.cs",
-              "RelativeToolTip": "Buon-Calice\\Controllers\\PedidosController.cs",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAcwIQAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PedidosData.cs",
-              "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\PedidosData.cs",
-              "RelativeDocumentMoniker": "Buon-Calice\\Data\\PedidosData.cs",
-              "ToolTip": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\PedidosData.cs",
-              "RelativeToolTip": "Buon-Calice\\Data\\PedidosData.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAcwJoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "DetallePedido.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\DetallePedido.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\DetallePedido.cs",
@@ -284,11 +242,11 @@
               "RelativeToolTip": "Buon-Calice\\Models\\DetallePedido.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.647Z"
+              "WhenOpened": "2026-11-22T03:17:06.124Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "Pedido.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\Pedido.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\Pedido.cs",
@@ -296,11 +254,11 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Pedido.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.649Z"
+              "WhenOpened": "2026-11-22T03:17:06.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "LoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\LoginRequest.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\LoginRequest.cs",
@@ -308,11 +266,11 @@
               "RelativeToolTip": "Buon-Calice\\Models\\LoginRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.654Z"
+              "WhenOpened": "2026-11-22T03:17:06.128Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Conexion.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Data\\Conexion.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Data\\Conexion.cs",
@@ -320,11 +278,11 @@
               "RelativeToolTip": "Buon-Calice\\Data\\Conexion.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.657Z"
+              "WhenOpened": "2026-11-22T03:17:06.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Producto.cs",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "Buon-Calice\\Models\\Producto.cs",
@@ -332,11 +290,11 @@
               "RelativeToolTip": "Buon-Calice\\Models\\Producto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T04:39:41.659Z"
+              "WhenOpened": "2026-11-22T03:17:06.133Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Buon-Calice.csproj",
               "DocumentMoniker": "C:\\Users\\mero0\\OneDrive\\Escritorio\\Buon-Calice (Elite Vinateria)\\Buon-CaliceAPI\\Buon-Calice\\Buon-Calice\\Buon-Calice.csproj",
               "RelativeDocumentMoniker": "Buon-Calice\\Buon-Calice.csproj",
@@ -344,7 +302,7 @@
               "RelativeToolTip": "Buon-Calice\\Buon-Calice.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-11-21T04:39:41.663Z"
+              "WhenOpened": "2026-11-22T03:17:06.137Z"
             }
           ]
         }

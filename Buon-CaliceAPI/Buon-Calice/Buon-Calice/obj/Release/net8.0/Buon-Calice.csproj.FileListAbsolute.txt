@@ -1,5 +1,6 @@
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\appsettings.Development.json
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\appsettings.json
+C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\dotnet-tools.json
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Buon-Calice.staticwebassets.endpoints.json
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Buon-Calice.exe
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Buon-Calice.deps.json
@@ -23,6 +24,8 @@ C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Microsoft.OpenApi.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Newtonsoft.Json.dll
+C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Stripe.net.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -76,4 +79,3 @@ C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Release\net8.0\Buon-Calice.pdb
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Release\net8.0\Buon-Calice.genruntimeconfig.cache
 C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\obj\Release\net8.0\ref\Buon-Calice.dll
-C:\Users\mero0\OneDrive\Escritorio\Buon-Calice (Elite Vinateria)\Buon-CaliceAPI\Buon-Calice\Buon-Calice\bin\Release\net8.0\dotnet-tools.json
